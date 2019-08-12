@@ -36,6 +36,8 @@ namespace CodePassio_Core
                 .HasForeignKey(pt => pt.PostId);
 
             modelBuilder.Entity<PostTag>()
+                .HasKey(pt => new { pt.PostId, pt.TagId });
+            modelBuilder.Entity<PostTag>()
                 .HasOne(pt => pt.Post)
                 .WithMany(p => p.PostTags)
                 .HasForeignKey(pt => pt.PostId);
@@ -48,6 +50,7 @@ namespace CodePassio_Core
                 .HasOne(c => c.Post)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId);
+            
         }
     }
 }
