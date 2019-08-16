@@ -4,95 +4,281 @@
     ViewData["Title"] = "Home page";
 }
 
-<section class="cta-section theme-bg-light py-5">
-    <div class="container text-center">
-        <h2 class="heading">DevBlog - A Blog Template Made For Developers</h2>
-        <div class="intro">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div>
-        <form class="signup-form form-inline justify-content-center pt-3">
-            <div class="form-group">
-                <label class="sr-only" for="semail">Your email</label>
-                <input type="email" id="semail" name="semail1" class="form-control mr-md-1 semail" placeholder="Enter email">
-            </div>
-            <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-    </div><!--//container-->
-</section>
-<section class="blog-list px-3 py-5 p-md-5">
+
+<!-- end MOBILE NAVIGATION -->
+<!-- BANNER POSTS -->
+<section class="banners">
     <div class="container">
-        <div class="item mb-5">
-            <div class="media">
-                <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="~/images/blog/blog-post-thumb-1.jpg" alt="image">
-                <div class="media-body">
-                    <h3 class="title mb-1"><a asp-page="Post">Why Every Developer Should Have A Blog</a></h3>
-                    <div class="meta mb-1"><span class="date">Published 2 days ago</span><span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>
-                    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-                    <a class="more-link" asp-page="Post">Read more &rarr;</a>
-                </div><!--//media-body-->
-            </div><!--//media-->
-        </div><!--//item-->
-        <div class="item mb-5">
-            <div class="media">
-                <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="~/images/blog/blog-post-thumb-2.jpg" alt="image">
-                <div class="media-body">
-                    <h3 class="title mb-1"><a asp-page="Post">A Guide to Becoming a Full-Stack Developer</a></h3>
-                    <div class="meta mb-1"><span class="date">Published 3 months ago</span><span class="time">3 min read</span><span class="comment"><a href="#">26 comments</a></span></div>
-                    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-                    <a class="more-link" asp-page="Post">Read more &rarr;</a>
-                </div><!--//media-body-->
-            </div><!--//media-->
-        </div><!--//item-->
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="banner-wrapper">
+                    <a href="blog_post.html" title="Leveling up in CSS">
+                        <div class="banner-wrapper-content">
+                            <h1 class="h2">Leveling up in CSS</h1>
+                            <span class="category-tag category-tag-white">CSS</span>
+                            <time datetime="2016-01-18" class="">January 18, 2016</time>
+                        </div>
+                    </a>
+                    <img class="img-fluid" src="img/photo1.jpg" alt="Post Photo" data-rjs="2">
+                </div>
+            </div>
 
-        <div class="item mb-5">
-            <div class="media">
-                <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="~/images/blog/blog-post-thumb-3.jpg" alt="image">
-                <div class="media-body">
-                    <h3 class="title mb-1"><a asp-page="Post">High Performance JavaScript</a></h3>
-                    <div class="meta mb-1"><span class="date">Published 1 month ago</span><span class="time">8 min read</span><span class="comment"><a href="#">12 comments</a></span></div>
-                    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-                    <a class="more-link" asp-page="Post">Read more &rarr;</a>
-                </div><!--//media-body-->
-            </div><!--//media-->
-        </div><!--//item-->
-        <div class="item mb-5">
-            <div class="media">
-                <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="~/images/blog/blog-post-thumb-4.jpg" alt="image">
-                <div class="media-body">
-                    <h3 class="title mb-1"><a asp-page="Post">Top 5 JavaScript Frameworks</a></h3>
-                    <div class="meta mb-1"><span class="date">Published 2 months ago</span><span class="time">15 min read</span><span class="comment"><a href="#">3 comments</a></span></div>
-                    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-                    <a class="more-link" asp-page="Post">Read more &rarr;</a>
-                </div><!--//media-body-->
-            </div><!--//media-->
-        </div><!--//item-->
+            <div class="col-md-6 col-xs-12">
+                <div class="banner-wrapper">
+                    <a href="blog_post.html" title="Evolving the Google Identity">
+                        <div class="banner-wrapper-content">
+                            <h1 class="h2">Evolving the Google Identity</h1>
+                            <span class="category-tag category-tag-white">Graphic</span>
+                            <time datetime="2016-01-18" class="">January 18, 2016</time>
+                        </div>
+                    </a>
+                    <img class="img-fluid" src="img/photo2.jpg" alt="Post Photo" data-rjs="2">
+                </div>
+            </div>
 
-        <div class="item mb-5">
-            <div class="media">
-                <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="~/images/blog/blog-post-thumb-5.jpg" alt="image">
-                <div class="media-body">
-                    <h3 class="title mb-1"><a asp-page="Post">Learn React in 24 Hours</a></h3>
-                    <div class="meta mb-1"><span class="date">Published 2 months ago</span><span class="time">10 min read</span><span class="comment"><a href="#">23 comments</a></span></div>
-                    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-                    <a class="more-link" asp-page="Post">Read more &rarr;</a>
-                </div><!--//media-body-->
-            </div><!--//media-->
-        </div><!--//item-->
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="banner-wrapper">
+                    <a href="blog_post.html" title="Angular 2 versus React: There Will Be Blood">
+                        <div class="banner-wrapper-content">
+                            <h1 class="h2">Angular 2 versus React: There Will Be Blood</h1>
+                            <span class="category-tag category-tag-white">JAVASCRIPT</span>
+                            <time datetime="2016-03-01" class="">March 1, 2016</time>
+                        </div>
+                    </a>
+                    <img class="img-fluid" src="img/photo3.jpg" alt="Post Photo" data-rjs="2">
+                </div>
+            </div>
 
-        <div class="item">
-            <div class="media">
-                <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="~/images/blog/blog-post-thumb-6.jpg" alt="image">
-                <div class="media-body">
-                    <h3 class="title mb-1"><a asp-page="Post">About Remote Working</a></h3>
-                    <div class="meta mb-1"><span class="date">Published 3 months ago</span><span class="time">2 min read</span><span class="comment"><a href="#">1 comment</a></span></div>
-                    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-                    <a class="more-link" asp-page="Post">Read more &rarr;</a>
-                </div><!--//media-body-->
-            </div><!--//media-->
-        </div><!--//item-->
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="banner-wrapper">
+                    <a href="blog_post.html" title="The End of Global CSS">
+                        <div class="banner-wrapper-content">
+                            <h1 class="h2">The End of Global CSS</h1>
+                            <span class="category-tag category-tag-white">HTML</span>
+                            <time datetime="2016-01-18" class="">January 18, 2016</time>
+                        </div>
+                    </a>
+                    <img class="img-fluid" src="img/photo4.jpg" alt="Post Photo" data-rjs="2">
+                </div>
+            </div>
 
-        <nav class="blog-nav nav nav-justified my-5">
-            <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-            <a class="nav-link-next nav-item nav-link rounded" href="blog-list.html">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-        </nav>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="banner-wrapper">
+                    <a href="blog_post.html" title="Building an CSS Framework">
+                        <div class="banner-wrapper-content">
+                            <h1 class="h2">Building an CSS Framework</h1>
+                            <span class="category-tag category-tag-white">CSS</span>
+                            <time datetime="2016-01-18" class="">January 18, 2016</time>
+                        </div>
+                    </a>
+                    <img class="img-fluid" src="img/photo5.jpg" alt="Post Photo" data-rjs="2">
+                </div>
+            </div>
 
+        </div>
     </div>
 </section>
+<!-- end BANNER POSTS -->
+<!-- MAIN -->
+<main>
+    <div class="container">
+        <div class="row">
+
+            <!-- ARTICLES -->
+            <div class="col-lg-8 col-xs-12">
+                <section class="articles">
+                    <article class="blue-article">
+                        <div class="articles-header">
+                            <time datetime="2016-10-11">12 hours ago</time>
+                            <span class="articles-header-tag-blue">Hot</span>
+                            <span class="articles-header-category"><a href="#" class="blue" title="">CSS</a></span>
+                        </div>
+                        <div class="articles-content">
+                            <h1>
+                                <a href="blog_post.html" title="">
+                                    10 Interview Questions Every JavaScript Developer
+                                    Should Know
+                                </a>
+                            </h1>
+                            <p>
+                                I was young, single, and freshly employed to direct National Journal’s Presentation
+                                Center, a searchable library of white-label
+                                PowerPoint presentations on political and policy developments. By day, I led a team of
+                                fellows in creating data
+                                visualizations...
+                            </p>
+                        </div>
+                        <div class="articles-footer">
+                            <ul class="articles-footer-info">
+                                <li>
+                                    <a href="#" class="light-link" title=""><i class="pe-7s-comment"></i> 7 Response</a>
+                                </li>
+                                <li><a href="#" class="light-link" title=""><i class="pe-7s-like"></i> 1221</a></li>
+                            </ul>
+                            <a title="" class="btn" href="blog_post.html">Read more</a>
+
+                        </div>
+                    </article>
+
+                    <article class="red-article">
+                        <div class="articles-header">
+                            <time datetime="2016-10-11">January 16, 2016</time>
+                            <span class="articles-header-category">
+                                <a href="#" class="red"
+                                   title="">Javascript</a>
+                            </span>
+                        </div>
+                        <div class="articles-content">
+                            <h1><a href="blog_post.html" title="">State of the Art JavaScript in 2016</a></h1>
+                            <p>
+                                Class in JS is not harmless sugar for prototypal OO. Class is a virus that infects
+                                everything it touches. It came to us formally
+                                in
+                                JavaScript with ES6, and at the same time, React was taking off. Lots of people started
+                                using classes for React components...
+                            </p>
+                        </div>
+                        <div class="articles-footer">
+                            <ul class="articles-footer-info">
+                                <li>
+                                    <a title="" href="#" class="light-link"><i class="pe-7s-comment"></i> 7 Response</a>
+                                </li>
+                                <li><a title="" href="#" class="light-link"><i class="pe-7s-like"></i> 1221</a></li>
+                            </ul>
+                            <a title="" class="btn" href="blog_post.html">Read more</a>
+                        </div>
+                    </article>
+
+                    <article class="yellow-article">
+                        <div class="articles-header">
+                            <time datetime="2016-10-11">12 hours ago</time>
+                            <span class="articles-header-category"><a title="" href="#" class="yellow">CSS</a></span>
+                        </div>
+                        <div class="articles-content">
+                            <h1><a title="" href="#">Want to learn JavaScript in 2016?</a></h1>
+                            <p>
+                                This is a walk-through of the steps I personally took in a single year, to begin
+                                learning JavaScript. My goal was to be able to
+                                get
+                                a job in a position where Javascript would be at the forefront of what I do on a daily
+                                basis...
+                            </p>
+                        </div>
+                        <div class="articles-footer">
+                            <ul class="articles-footer-info">
+                                <li>
+                                    <a title="" href="#" class="light-link"><i class="pe-7s-comment"></i> 7 Response</a>
+                                </li>
+                                <li><a title="" href="#" class="light-link"><i class="pe-7s-like"></i> 1221</a></li>
+                            </ul>
+                            <a title="" class="btn" href="blog_post.html">Read more</a>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="articles-header">
+                            <time datetime="2016-10-11">12 hours ago</time>
+                            <span class="articles-header-category"><a title="" href="#" class="grey">Other</a></span>
+                        </div>
+                        <div class="articles-content">
+                            <h1><a title="" href="blog_post.html">Want to learn JavaScript in 2016?</a></h1>
+                            <p>
+                                This is a walk-through of the steps I personally took in a single year, to begin
+                                learning JavaScript. My goal was to be able to
+                                get
+                                a job in a position where Javascript would be at the forefront of what I do on a daily
+                                basis...
+                            </p>
+                        </div>
+                        <div class="articles-footer">
+                            <ul class="articles-footer-info">
+                                <li>
+                                    <a title="" href="#" class="light-link"><i class="pe-7s-comment"></i> 7 Response</a>
+                                </li>
+                                <li><a title="" href="#" class="light-link"><i class="pe-7s-like"></i> 1221</a></li>
+                            </ul>
+                            <a title="" class="btn" href="blog_post.html">Read more</a>
+                        </div>
+                    </article>
+
+                    <!-- PAGINATION -->
+                    <nav aria-label="...">
+                        <a title="" href="" class="btn-small-white pagination-back">Back</a>
+                        <ul class="pagination">
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item page-item-more"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">25</a></li>
+                        </ul>
+                        <a title="" href="blog_post.html" class="btn-small-white pagination-next">Next</a>
+                    </nav>
+
+                </section>
+            </div>
+
+            <!-- AUTHOR -->
+            <div class="aside-blocks col-lg-4 col-xs-12">
+                <aside class="author">
+                    <img src="img/profile-picture.png" alt="" data-rjs="2">
+                    <h2>Bill Gates</h2>
+                    <span class="author-info">Front-End Developer</span>
+                    <span class="author-info">Microsoft Company</span>
+                    <div class="social">
+                        <a href="" title="Twitter"><i class="icon-social_twitter_circle"></i></a>
+                        <a href="" title="Github"><i class="icon-social_github_circle"></i></a>
+                        <a href="" title="LinkedIn"><i class="icon-social_linkedin_circle"></i></a>
+                    </div>
+                    <ul class="author-nav">
+                        <li><a href="" title=""><i class="pe-7s-bookmarks"></i> Download my CV</a></li>
+                        <li><a href="" title=""><i class="pe-7s-paper-plane"></i> Write message</a></li>
+                    </ul>
+                </aside>
+
+                <aside class="categories">
+                    <h2 class="aside-title">Categories</h2>
+                    <ul>
+                        <li class="nav-elipse-blue"><a href="#" title="Blog CSS articles">CSS</a></li>
+                        <li class="nav-elipse-red"><a href="#" title="Blog HTML articles">HTML</a></li>
+                        <li class="nav-elipse-yellow"><a href="#" title="Blog Javascript articles">Javascript</a></li>
+                        <li class="nav-elipse-green"><a href="#" title="Blog raphic articles">Graphic</a></li>
+                        <li><a href="#" title="Blog other articles">Other</a></li>
+                    </ul>
+                </aside>
+
+                <aside class="advertisement">
+                    <a href=""><img src="img/advertisement.jpg" alt="Advertisement" data-rjs="2"></a>
+                </aside>
+
+                <aside class="last-project">
+                    <h2 class="aside-title">Last Project</h2>
+                    <div class="last-project-one">
+                        <h3 class="h4"><a href="">Microsoft TypeScript</a></h3>
+                        <time datetime="2016-12-31T23:59:59Z">January 18, 2016</time>
+                        <p class="font-primary">
+                            TypeScript starts from the same syntax and semantics that millions of
+                            JavaScript developers know...
+                        </p>
+                        <a href="#" title="Watch it" class="btn btn-small">Watch it</a>
+                    </div>
+                </aside>
+
+                <aside class="tags">
+                    <h2 class="aside-title">Tags</h2>
+                    <div class="tags-content">
+                        <span class="tag tag-pill tag-default"><a href="">graphic</a></span>
+                        <span class="tag tag-pill tag-default"><a href="">angular2</a></span>
+                        <span class="tag tag-pill tag-default"><a href="">graphic</a></span>
+                        <span class="tag tag-pill tag-default"><a href="">react</a></span>
+                        <span class="tag tag-pill tag-default"><a href="">it</a></span>
+                        <span class="tag tag-pill tag-default"><a href="">science</a></span>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end MAIN -->

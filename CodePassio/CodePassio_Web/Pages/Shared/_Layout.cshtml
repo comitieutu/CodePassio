@@ -5,94 +5,249 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CodePassio</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-    </environment>
-    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
-    @RenderSection("Styles", required:false)
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="~/css/pe-icon-7-stroke/Pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="~/css/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/social-icons.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/css/owl.theme.css">
+    <link rel="stylesheet" href="~/css/main.css" />
 
 </head>
 <body>
-    <header class="header text-center">
-        <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Anthony's Blog</a></h1>
-
-        <nav class="navbar navbar-expand-lg navbar-dark">
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div id="navigation" class="collapse navbar-collapse flex-column">
-                <div class="profile-section pt-3 pt-lg-0">
-                    <img class="profile-image mb-3 rounded-circle mx-auto" src="~/images/profile.png" alt="image">
-
-                    <div class="bio mb-3">Hi, my name is Anthony Doe. Briefly introduce yourself here. You can also provide a link to the about page.<br><a href="about.html">Find out more about me</a></div><!--//bio-->
-                    <ul class="social-list list-inline py-3 mx-auto">
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
-                    </ul><!--//social-list-->
-                    <hr>
-                </div><!--//profile-section-->
-
-                <ul class="navbar-nav flex-column text-left">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="PostList"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
-                    </li>
-                </ul>
-
-                <div class="my-2 my-md-3">
-                    <a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Get in Touch</a>
+    <header class="navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header-top">
+                        <div class="header-top-logo">
+                            <a href="index.html" title="Logo"><img src="img/logo.png" alt="Dblog Logo" data-rjs="2"></a>
+                        </div>
+                        <div class="header-top-text">
+                            <p>
+                                <span class="font-italic">“Modern Javascript”</span>
+                                book is available! <a href="shop.html" title="Modern Javascript Book">
+                                    Check out<i class="pe-7s-angle-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <nav class="header-top-nav">
+                            <ul>
+                                <li class="header-top-nav-search">
+                                    <a href="#" class="light-link" title="Search"><i class="pe-7s-search"></i></a>
+                                    <form action="#" method="get">
+                                        <input type="text" class="form-control" placeholder="Search...">
+                                        <button type="submit"><i class="pe-7s-search"></i></button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="#" class="light-link" title="Menu">
+                                        <div id="menu-animate-icon" class="header-top-nav-menu-icon">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <nav class="header-nav">
+                        <ul>
+                            <li class="active"><a href="index.html" title="Start page">Start page</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" title="Blog articles">Blog articles</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-elipse-blue">
+                                        <a asp-page="/BlogList" title="Blog CSS articles">CSS</a>
+                                    </li>
+                                    <li class="nav-elipse-red">
+                                        <a asp-page="/BlogList" title="Blog HTML articles">HTML</a>
+                                    </li>
+                                    <li class="nav-elipse-yellow">
+                                        <a asp-page="/BlogList" title="Blog Javascript articles">Javascript</a>
+                                    </li>
+                                    <li class="nav-elipse-green">
+                                        <a asp-page="/BlogList" title="Blog raphic articles">Graphic</a>
+                                    </li>
+                                    <li><a asp-page="/BlogList" title="Blog Post">Blog Post</a></li>
+                                </ul>
+                            </li>
+                            <li><a asp-page="/AboutMe" title="About me">About me</a></li>
+                            <li>                                
+                            <a asp-page="/Portfolio" title="My projects">My projects</a></li>
+                            <li><a href="contact.html" title="Contact me">Contact me</a></li>
+                            <li class="buyproducts-link"><a asp-page="Shop" title="Buy products">Buy products</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
-    <div class="main-wrapper">
-        <partial name="_CookieConsentPartial" />
-            @RenderBody()
 
-        <footer class="footer text-center py-2 theme-bg-dark">
-            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
-            <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-        </footer>
-    </div>
+    <nav class="mobile-nav header-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderBody();
+    
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row">
 
-    @RenderSection("Scripts", required: false)
+                <div class="col-md-4 col-xs-12">
+                    <div class="footer-section">
+                        <h3 class="footer-section-title">Last Responses</h3>
+                        <ul class="footer-section-content">
+                            <li class="footer-section-content-response">
+                                <img src="img/profile-picture2.png" alt="Profile Picture" data-rjs="2">
+                                <div class="footer-section-content-response-wrapper">
+                                    <h4>
+                                        <span class="response-author">Jobby Foster</span> in
+                                        <a href="" class="response-subject light-link" title="Subject Response">
+                                            Want to learn Javascript in 2016?
+                                        </a>
+                                    </h4>
+                                    <p class="font-primary">Love this guy and his dog, really nice work!</p>
+                                </div>
+                            </li>
+
+                            <li class="footer-section-content-response">
+                                <img src="img/profile-picture3.png" alt="Profile Picture" data-rjs="2">
+                                <div class="footer-section-content-response-wrapper">
+                                    <h4>
+                                        <span class="response-author">Sheryl Winarick</span> in
+                                        <a href="" class="response-subject light-link" title="Subject Response">
+                                            Want to learn Javascript in 2016?
+                                        </a>
+                                    </h4>
+                                    <p class="font-primary">Love the way you did the background image man.</p>
+                                </div>
+                            </li>
+
+                            <li class="footer-section-content-response">
+                                <img src="img/profile-picture4.png" alt="Profile Picture" data-rjs="2">
+                                <div class="footer-section-content-response-wrapper">
+                                    <h4>
+                                        <span class="response-author">Jobby Foster</span> in
+                                        <a href="" class="response-subject light-link" title="Subject Response">
+                                            Want to learn Javascript in 2016?
+                                        </a>
+                                    </h4>
+                                    <p class="font-primary">Really nice style. I need to take note for drawing people!</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="footer-section">
+                        <h3 class="footer-section-title">Last Tweet</h3>
+                        <ul class="footer-section-content">
+
+                            <li class="footer-section-content-twitt">
+                                <h4><a href="#" title="microsoft">@@microsoft</a></h4>
+                                <time datetime="2016-12-31T23:59:59Z">3 days ago</time>
+                                <p class="font-primary">
+                                    She's climbing #50Peaks in 50 states in 50 days. Meet <a href=""
+                                                                                             title=""
+                                                                                             class="light-link">http://msft.it/Melissa</a>
+                                </p>
+                            </li>
+
+                            <li class="footer-section-content-twitt">
+                                <h4><a href="" title="microsoft">@@microsoft</a></h4>
+                                <time datetime="2016-12-31T23:59:59Z">3 days ago</time>
+                                <p class="font-primary">
+                                    She's climbing #50Peaks in 50 states in 50 days. Meet <a href=""
+                                                                                             title=""
+                                                                                             class="light-link">http://msft.it/Melissa</a>
+                                </p>
+                            </li>
+
+                            <li class="footer-section-content-twitt">
+                                <h4><a href="" title="microsoft">@@microsoft</a></h4>
+                                <time datetime="2016-12-31T23:59:59Z">3 days ago</time>
+                                <p class="font-primary">
+                                    She's climbing #50Peaks in 50 states in 50 days. Meet <a href=""
+                                                                                             title=""
+                                                                                             class="light-link">http://msft.it/Melissa</a>
+                                </p>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="footer-section border-bottom">
+                        <img src="img/logo-grey.png" alt="" class="footer-section-title-img" data-rjs="2">
+                        <div class="footer-section-content">
+                            <p class="font-primary footer-section-content-about">
+                                D -Blog is a responsive, beautiful, <span class="black">creative & unique</span> wordpress
+                                theme best suited for blogs & personal
+                                portfolio showcases. It’s
+                                easy to use &amp; setup, <span class="black">SEO friendly</span> and has top notch standard
+                                compliant code.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3 class="footer-section-title footer-section-newsletter">Newsletter</h3>
+                        <div class="footer-section-content">
+                            <p class="font-primary ">Stay up to do date with my posts, subscribe to newsletter:</p>
+                            <form action="#" method="post">
+                                <input type="text" class="form-control" placeholder="Type Email">
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="copyright">
+                        <ul>
+                            <li><a href="" title="Twitter"><i class="icon-social_twitter_circle"></i></a></li>
+                            <li><a href="" title="Github"><i class="icon-social_github_circle"></i></a></li>
+                            <li><a href="" title="LinkedIn"><i class="icon-social_linkedin_circle"></i></a></li>
+                        </ul>
+                        <p class="font-primary">
+                            &copy; Theme by <a href="#" title="" class="black">Komon.ski</a> . All
+                            Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end COPYRIHT -->
+    </footer>
+    <!-- end FOOTER -->
+    <!-- EXTERNAL JAVASCRIPT -->
+    <script type="text/javascript" src="~/js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="~/js/tether.min.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/retina.min.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/webfont.js"></script>
+
+    <!-- MY JAVASCRIPT -->
+    <script type="text/javascript" src="~/js/scripts.js"></script>
 </body>
 </html>

@@ -1,0 +1,129 @@
+﻿@page
+@model CodePassio_Web.Pages.PortfolioModel
+<!-- MAIN -->
+<main>
+
+
+    <div class="container">
+        <div class="row">
+
+            <!-- CATEGORY TITLE -->
+            <div class="col-xs-12">
+                <section class="category-title">
+                    <h1>Portfolio</h1>
+                    <span>17 Projects</span>
+                </section>
+            </div>
+            <!-- end CATEGORY TITLE -->
+            <!-- PORTFOLIO MENU -->
+            <div class="col-xs-12">
+                <nav class="portfolio-menu">
+                    <ul>
+                        <li class="active"><a href="#" data-portfolio="all" title="All">All</a></li>
+                        <li><a href="#" data-portfolio="applications" title="Applications">Applications</a></li>
+                        <li><a href="#" data-portfolio="frameworks" title="Frameworks">Frameworks</a></li>
+                        <li><a href="#" data-portfolio="scripts" title="Scripts">Scripts</a></li>
+                        <li><a href="#" data-portfolio="layouts" title="Layouts">Layouts</a></li>
+                        <li><a href="#" data-portfolio="graphic" title="Graphic">Graphic</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- PORTFOLIO -->
+            <div class="col-xs-12">
+                <div class="portfolio">
+                    <p class="portfolio-empty"><i class="pe-7s-attention"></i> No items at this category. Sorry!</p>
+                    <div class="portfolio-item white-box" data-portfolio="applications">
+                        <div class="portfolio-item-wrapper portfolio-item-default">
+                            <div class="portfolio-item-wrapper-left">
+                                <h2>Puzzle Game</h2>
+                                <span class="portfolio-category">Applications</span>
+                                <p class="font-primary">
+                                    Project we will be working with the HTML5 canvas and Javascript to create a dynamic tile swapping game.
+                                    The
+                                    result will be a puzzle
+                                    that works with any given image, and has flexible.
+                                </p>
+                                <button class="btn">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item white-box" data-portfolio="graphic">
+                        <div class="portfolio-item-wrapper" style="background: #f0f0ee">
+                            <div class="portfolio-item-wrapper-left">
+                                <h2>UI App Interface</h2>
+                                <span class="portfolio-category">Graphic</span>
+                                <p class="font-primary">Here's a quick sneak peek of my personal portfolio, responsive, view from mobile.</p>
+                                <button class="btn">Screenshots</button>
+                            </div>
+                            <div class="portfolio-item-wrapper-right">
+                                <img class="img-fluid" src="img/portfolio-image.jpg" alt="" data-rjs="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item white-box" data-portfolio="scripts">
+                        <div class="portfolio-item-wrapper" style="background: #fbfbfb">
+                            <div class="portfolio-item-wrapper-left">
+                                <h2>David Personal Website</h2>
+                                <span class="portfolio-category">Graphic</span>
+                                <p class="font-primary">
+                                    This is still a work in progress, but here is a little preview of the mobile portfolio. It's going to be
+                                    very simple and all about showcasing the work. Once you tap a thumbnail you can swipe either way.
+                                </p>
+                                <button class="btn">Screenshots</button>
+                            </div>
+                            <div class="portfolio-item-wrapper-right">
+                                <img class="img-fluid" src="img/portfolio-image-2.jpg" alt="" data-rjs="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item white-box" data-portfolio="layouts">
+                        <div class="portfolio-item-wrapper portfolio-item-default">
+                            <div class="portfolio-item-wrapper-left">
+                                <h2>Angular To-Do App</h2>
+                                <span class="portfolio-category">Applications</span>
+                                <p class="font-primary">
+                                    You can specify an AngularJS module to be used as the root module for the application. This module will
+                                    be loaded into the $injector when the application is bootstrapped. It should contain the application.
+                                </p>
+                                <button class="btn">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item white-box" data-portfolio="graphic">
+                        <div class="portfolio-item-wrapper portfolio-item-default">
+                            <div class="portfolio-item-wrapper-left">
+                                <h2>React Gallery Module</h2>
+                                <span class="portfolio-category">Applications</span>
+                                <p class="font-primary">
+                                    React makes it painless to create interactive UIs. Design simple views for each state in your
+                                    application, and React will efficiently update and render.
+                                </p>
+                                <button class="btn">Read more</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item white-box" data-portfolio="graphic">
+                        <div class="portfolio-item-wrapper" style="background: #e4eff7">
+                            <div class="portfolio-item-wrapper-left">
+                                <h2>UI App Interface #2</h2>
+                                <span class="portfolio-category">Graphic</span>
+                                <p class="font-primary">
+                                    Interaction of adding a new goal for my health app project. I tried experimenting with 3d touch in this
+                                    case, but user will be able to do it also by normal way with plus button on the top.
+                                </p>
+                                <button class="btn">Screenshots</button>
+                            </div>
+                            <div class="portfolio-item-wrapper-right">
+                                <img class="img-fluid" src="img/portfolio-image-3.jpg" alt="" data-rjs="2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+<!-- end MAIN -->
