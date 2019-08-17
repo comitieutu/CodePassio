@@ -1,0 +1,84 @@
+﻿@page
+@model CodePassio_Admin.Pages.Post.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Excerpt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Tag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Deleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].ModifiedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Post) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Excerpt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

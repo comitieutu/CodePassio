@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="">
+    <title>Comi</title>
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style-responsive.css" rel="stylesheet">
+</head>
+
+<body>
+    @RenderBody()
+    <!-- js placed at the end of the document so the pages load faster -->
+    @RenderSection("scripts", false)
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery.backstretch.min.js"></script>
+    <script>
+        var url = @Url.Content("/img/") + "login-bg.jpg"
+            $.backstretch(url, {
+            speed: 500
+        });
+    </script>
+</body>
+
+</html>

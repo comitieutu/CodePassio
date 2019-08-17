@@ -17,9 +17,4 @@
     <ProjectReference Include="..\CodePassio_Core\CodePassio_Core.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Pages\" />
-  </ItemGroup>
-
 </Project>
