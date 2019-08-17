@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CodePassio_Core;
+using CodePassio_Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,8 +41,19 @@ namespace CodePassio_Web
                     Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("CodePassio_Web")));
 
+            services.AddDefaultIdentity<ApplicationUser>().AddRoles<ApplicationRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                //options.Conventions.AuthorizeAreaPage("Admin", "/Index", "AcessToAdmin");
+                //options.Conventions.AuthorizeAreaFolder("Admin", "/Post", "AcessToAdmin");
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AcessToAdmin",
+                     policy => policy.RequireRole(Role.Manager.ToString(), Role.SuperAdmin.ToString()));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +73,8 @@ namespace CodePassio_Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }
