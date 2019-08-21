@@ -225,7 +225,11 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-                <partial name="_LoginPartial" />
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm">
+                </form>
+                <ul class="nav pull-right top-menu">
+                    <li><button class="logout" type="submit" form="logoutForm">Logout</button></li>
+                </ul>
             </div>
         </header>
 
