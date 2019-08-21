@@ -225,8 +225,10 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm">
+                </form>
                 <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">Logout</a></li>
+                    <li><button class="logout" type="submit" form="logoutForm">Logout</button></li>
                 </ul>
             </div>
         </header>
