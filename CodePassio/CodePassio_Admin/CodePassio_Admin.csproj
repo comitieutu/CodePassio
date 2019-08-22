@@ -24,4 +24,9 @@
     <Folder Include="Pages\User\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
+  </ItemGroup>
+
 </Project>
