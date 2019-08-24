@@ -37,7 +37,7 @@ namespace CodePassio_Admin.Pages.Post
             {
                 return NotFound();
             }
-           ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id");
+           ViewData["CategoryId"] = new SelectList(_context.Set<CodePassio_Core.Entities.Category>(), "Id", "Id");
             return Page();
         }
 

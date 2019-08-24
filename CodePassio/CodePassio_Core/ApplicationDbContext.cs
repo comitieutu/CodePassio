@@ -18,6 +18,7 @@ namespace CodePassio_Core
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,7 +52,12 @@ namespace CodePassio_Core
                 .HasOne(c => c.Post)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId);
-            
+
+            modelBuilder.Entity<Category>().HasQueryFilter(c => !c.Deleted)
+                .HasMany(c => c.Posts)
+                .WithOne(p => p.Category)
+                .HasForeignKey(p => p.CategoryId);
+
         }
     }
 }

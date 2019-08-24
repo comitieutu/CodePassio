@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using CodePassio_Admin.Configurations;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -43,6 +45,13 @@ namespace CodePassio_Admin
 
             services.AddDefaultIdentity<ApplicationUser>().AddRoles<ApplicationRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MapperModel());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddMvc(config =>
             {
