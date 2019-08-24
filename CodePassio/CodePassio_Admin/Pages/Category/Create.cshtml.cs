@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace CodePassio_Admin.Pages.Post
+namespace CodePassio_Admin.Pages.Category
 {
     public class CreateModel : PageModel
     {
@@ -21,12 +22,15 @@ namespace CodePassio_Admin.Pages.Post
 
         public IActionResult OnGet()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Set<CodePassio_Core.Entities.Category>(), "Id", "Id");
+            var parent = _context.Categories.AsNoTracking().Where(c => c.Parent == Guid.Empty).ToList();
+            Categories = new List<SelectListItem>();
+            parent.ForEach(c => Categories.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
             return Page();
         }
 
         [BindProperty]
-        public CodePassio_Core.Entities.Post Post { get; set; }
+        public CodePassio_Core.Entities.Category Category { get; set; }
+        public List<SelectListItem> Categories { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -35,7 +39,7 @@ namespace CodePassio_Admin.Pages.Post
                 return Page();
             }
 
-            _context.Posts.Add(Post);
+            _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

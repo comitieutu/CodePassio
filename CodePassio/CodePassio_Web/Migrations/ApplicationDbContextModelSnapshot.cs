@@ -126,13 +126,17 @@ namespace CodePassio_Web.Migrations
 
                     b.Property<bool>("Deleted");
 
+                    b.Property<string>("Description");
+
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Name");
 
+                    b.Property<Guid?>("Parent");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CodePassio_Core.Entities.Comment", b =>
@@ -264,9 +268,11 @@ namespace CodePassio_Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -284,9 +290,11 @@ namespace CodePassio_Web.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 
