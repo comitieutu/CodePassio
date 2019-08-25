@@ -14,6 +14,9 @@ namespace CodePassio_Admin.Pages.Post
     {
         private readonly CodePassio_Core.ApplicationDbContext _context;
 
+        // Pass to view properties
+        public List<SelectListItem> CategoryList { get; set; }
+
         public CreateModel(CodePassio_Core.ApplicationDbContext context)
         {
             _context = context;
@@ -21,7 +24,10 @@ namespace CodePassio_Admin.Pages.Post
 
         public IActionResult OnGet()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Set<CodePassio_Core.Entities.Category>(), "Id", "Id");
+            CategoryList = new List<SelectListItem>();
+            var CategoriesData = _context.Categories.ToList();
+            CategoriesData.ForEach(c => CategoryList.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
+
             return Page();
         }
 
