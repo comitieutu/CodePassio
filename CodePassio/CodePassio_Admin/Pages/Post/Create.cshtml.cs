@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodePassio_Service.Services.Post;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,14 +13,16 @@ namespace CodePassio_Admin.Pages.Post
 {
     public class CreateModel : PageModel
     {
+        private readonly IPostService _postService;
         private readonly CodePassio_Core.ApplicationDbContext _context;
 
         // Pass to view properties
         public List<SelectListItem> CategoryList { get; set; }
 
-        public CreateModel(CodePassio_Core.ApplicationDbContext context)
+        public CreateModel(CodePassio_Core.ApplicationDbContext context, IPostService postService)
         {
             _context = context;
+            _postService = postService;
         }
 
         public IActionResult OnGet()
@@ -45,6 +48,12 @@ namespace CodePassio_Admin.Pages.Post
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+        public async Task<IActionResult> OnPostDraftAsync()
+        {
+            _postService.CreateDraftAsync(Post);
+            return RedirectToPage("./Post");
         }
     }
 }

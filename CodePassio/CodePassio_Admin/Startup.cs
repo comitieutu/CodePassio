@@ -6,6 +6,7 @@ using AutoMapper;
 using CodePassio_Admin.Configurations;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using CodePassio_Service.Services.Post;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -61,6 +62,7 @@ namespace CodePassio_Admin
                 config.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAuthorization();
+            services.AddScoped<IPostService, PostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
