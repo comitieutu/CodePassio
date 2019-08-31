@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using CodePassio_Service.Interfaces;
 
 namespace CodePassio_Admin.Pages.Category
 {
     public class EditModel : PageModel
     {
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly IRepository<CodePassio_Core.Entities.Category> _categoryService;
         private readonly IMapper _mapper;
 
-        public EditModel(CodePassio_Core.ApplicationDbContext context, IMapper mapper)
+        public EditModel(IRepository<CodePassio_Core.Entities.Category> categoryService, IMapper mapper)
         {
-            _context = context;
+            _categoryService = categoryService;
             _mapper = mapper;
         }
 
@@ -32,14 +33,14 @@ namespace CodePassio_Admin.Pages.Category
             public Guid? Parent { get; set; }
         }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public IActionResult OnGet(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            var category = _categoryService.Get(id);
             InputModel = _mapper.Map<EditCategory>(category);
 
             if (category == null)
@@ -47,7 +48,7 @@ namespace CodePassio_Admin.Pages.Category
                 return NotFound();
             }
 
-            var cates = _context.Categories.AsNoTracking().Where(c => c.Parent == Guid.Empty).ToList();
+            var cates = _categoryService.Get(c => c.Parent == Guid.Empty).AsNoTracking().ToList();
             Categories = new List<SelectListItem>();
             cates.ForEach(c =>
             {
@@ -64,7 +65,7 @@ namespace CodePassio_Admin.Pages.Category
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -72,16 +73,14 @@ namespace CodePassio_Admin.Pages.Category
             }
 
             var category = _mapper.Map<CodePassio_Core.Entities.Category>(InputModel);
-            category.ModifiedDate = DateTime.Now;
-            _context.Attach(category).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                _categoryService.Edit(category);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(InputModel.Id))
+                if (!_categoryService.IsExist(InputModel.Id))
                 {
                     return NotFound();
                 }
@@ -92,11 +91,6 @@ namespace CodePassio_Admin.Pages.Category
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool CategoryExists(Guid id)
-        {
-            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }
