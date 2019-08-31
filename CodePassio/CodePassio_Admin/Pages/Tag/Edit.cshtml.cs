@@ -8,29 +8,40 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using AutoMapper;
+using CodePassio_Service.Interfaces;
 
 namespace CodePassio_Admin.Pages.Tag
 {
     public class EditModel : PageModel
     {
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly IRepository<CodePassio_Core.Entities.Tag> _tagService;
+        private readonly IMapper _mapper;
 
-        public EditModel(CodePassio_Core.ApplicationDbContext context)
+        public EditModel(IRepository<CodePassio_Core.Entities.Tag> tagService, IMapper mapper)
         {
-            _context = context;
+            _tagService = tagService;
+            _mapper = mapper;
         }
 
         [BindProperty]
-        public CodePassio_Core.Entities.Tag Tag { get; set; }
+        public EditTagModel Tag { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public class EditTagModel
+        {
+            public Guid Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        public IActionResult OnGet(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Tag = await _context.Tags.FirstOrDefaultAsync(m => m.Id == id);
+            var tag = _tagService.Get(id);
+            Tag = _mapper.Map<EditTagModel>(tag);
 
             if (Tag == null)
             {
@@ -39,22 +50,22 @@ namespace CodePassio_Admin.Pages.Tag
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Tag).State = EntityState.Modified;
+            var tag = _mapper.Map<CodePassio_Core.Entities.Tag>(Tag);
 
             try
             {
-                await _context.SaveChangesAsync();
+                _tagService.Edit(tag);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TagExists(Tag.Id))
+                if (!_tagService.IsExist(Tag.Id))
                 {
                     return NotFound();
                 }
@@ -65,11 +76,6 @@ namespace CodePassio_Admin.Pages.Tag
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool TagExists(Guid id)
-        {
-            return _context.Tags.Any(e => e.Id == id);
         }
     }
 }

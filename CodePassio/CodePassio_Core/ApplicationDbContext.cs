@@ -37,7 +37,7 @@ namespace CodePassio_Core
                 .WithOne(pt => pt.Tag)
                 .HasForeignKey(pt => pt.PostId);
 
-            modelBuilder.Entity<PostTag>()
+            modelBuilder.Entity<PostTag>().HasQueryFilter(p => !p.Deleted)
                 .HasKey(pt => new { pt.PostId, pt.TagId });
             modelBuilder.Entity<PostTag>()
                 .HasOne(pt => pt.Post)

@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using AutoMapper;
+using CodePassio_Service.Interfaces;
 
 namespace CodePassio_Admin.Pages.Tag
 {
     public class CreateModel : PageModel
     {
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly IRepository<CodePassio_Core.Entities.Tag> _tagService;
+        private readonly IMapper _mapper;
 
-        public CreateModel(CodePassio_Core.ApplicationDbContext context)
+        public CreateModel(IRepository<CodePassio_Core.Entities.Tag> tagService, IMapper mapper)
         {
-            _context = context;
+            _tagService = tagService;
+            _mapper = mapper;
         }
 
         public IActionResult OnGet()
@@ -25,17 +29,21 @@ namespace CodePassio_Admin.Pages.Tag
         }
 
         [BindProperty]
-        public CodePassio_Core.Entities.Tag Tag { get; set; }
+        public CreateTagModel Tag { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public class CreateTagModel
+        {
+            public string Name { get; set; }
+        }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Tags.Add(Tag);
-            await _context.SaveChangesAsync();
+            _tagService.Create(_mapper.Map<CodePassio_Core.Entities.Tag>(Tag));
 
             return RedirectToPage("./Index");
         }

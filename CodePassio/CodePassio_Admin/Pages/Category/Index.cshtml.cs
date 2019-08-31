@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using CodePassio_Service.Interfaces;
 
 namespace CodePassio_Admin.Pages.Category
 {
     public class IndexModel : PageModel
     {
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly IRepository<CodePassio_Core.Entities.Category> _categoryService;
         private readonly IMapper _mapper;
 
-        public IndexModel(CodePassio_Core.ApplicationDbContext context, IMapper mapper)
+        public IndexModel(IRepository<CodePassio_Core.Entities.Category> categoryService, IMapper mapper)
         {
-            _context = context;
+            _categoryService = categoryService;
             _mapper = mapper;
         }
 
@@ -30,29 +31,28 @@ namespace CodePassio_Admin.Pages.Category
             public string ParentName { get; set; }
         }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            var categories = await _context.Categories.AsNoTracking().ToListAsync();
+            var categories = _categoryService.GetAll();
             Category = _mapper.Map<IList<CategoryViewModel>>(categories);
             Category.ToList().ForEach(c =>
             {
-                c.ParentName = c.Parent != Guid.Empty ? _context.Categories.Find(c.Parent).Name : c.ParentName;
+                c.ParentName = c.Parent != Guid.Empty ? _categoryService.Get(c.Id).Name : c.ParentName;
             });
         }
 
-        public async Task<IActionResult> OnGetDeleteAsync(Guid id)
+        public IActionResult OnGetDelete(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            var category = _categoryService.Get(id);
 
             if (category != null && category.Parent != Guid.Empty)
             {
-                _context.Categories.Remove(category);
-                await _context.SaveChangesAsync();
+                _categoryService.Delete(id);
             }
 
             return RedirectToPage("./Index");
