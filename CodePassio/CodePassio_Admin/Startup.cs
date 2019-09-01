@@ -6,6 +6,8 @@ using AutoMapper;
 using CodePassio_Admin.Configurations;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using CodePassio_Service.Interfaces;
+using CodePassio_Service.Services;
 using CodePassio_Service.Services.Post;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -46,6 +48,9 @@ namespace CodePassio_Admin
 
             services.AddDefaultIdentity<ApplicationUser>().AddRoles<ApplicationRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IRepository<Tag>, TagService>();
+            services.AddScoped<IRepository<Category>, CategoryService>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {

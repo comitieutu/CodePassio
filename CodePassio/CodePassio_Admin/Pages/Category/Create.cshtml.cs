@@ -8,39 +8,49 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using CodePassio_Service.Interfaces;
+using AutoMapper;
 
 namespace CodePassio_Admin.Pages.Category
 {
     public class CreateModel : PageModel
     {
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly IRepository<CodePassio_Core.Entities.Category> _categoryService;
+        private readonly IMapper _mapper;
 
-        public CreateModel(CodePassio_Core.ApplicationDbContext context)
+        public CreateModel(IRepository<CodePassio_Core.Entities.Category> categoryService, IMapper mapper)
         {
-            _context = context;
+            _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         public IActionResult OnGet()
         {
-            var parent = _context.Categories.AsNoTracking().Where(c => c.Parent == Guid.Empty).ToList();
+            var parent = _categoryService.Get(c => c.Parent == Guid.Empty).AsNoTracking().ToList();
             Categories = new List<SelectListItem>();
             parent.ForEach(c => Categories.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
             return Page();
         }
 
         [BindProperty]
-        public CodePassio_Core.Entities.Category Category { get; set; }
+        public CreateCategoryModel Category { get; set; }
         public List<SelectListItem> Categories { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public class CreateCategoryModel
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public Guid? Parent { get; set; }
+        }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Categories.Add(Category);
-            await _context.SaveChangesAsync();
+            _categoryService.Create(_mapper.Map<CodePassio_Core.Entities.Category>(Category));
 
             return RedirectToPage("./Index");
         }
