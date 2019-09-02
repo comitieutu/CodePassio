@@ -1,58 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodePassio_Service.Services.Post;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CodePassio_Core;
-using CodePassio_Core.Entities;
+using CodePassio_Service.Services;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodePassio_Admin.Pages.Post
 {
     public class CreateModel : PageModel
     {
-        private readonly IPostService _postService;
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly PostService _postService;
+        private readonly IMapper _mapper;
+        private readonly CategoryService _categoryService;
 
-        // Pass to view properties
-        public List<SelectListItem> CategoryList { get; set; }
-
-        public CreateModel(CodePassio_Core.ApplicationDbContext context, IPostService postService)
+        public CreateModel(PostService postService, IMapper mapper, CategoryService categoryService)
         {
-            _context = context;
             _postService = postService;
+            _mapper = mapper;
+            _categoryService = categoryService;
         }
 
         public IActionResult OnGet()
         {
             CategoryList = new List<SelectListItem>();
-            var CategoriesData = _context.Categories.ToList();
-            CategoriesData.ForEach(c => CategoryList.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
+            var categoriesData = _categoryService.Get(c => c.Parent == Guid.Empty).AsNoTracking().ToList();
+            categoriesData.ForEach(c => CategoryList.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
 
             return Page();
         }
 
         [BindProperty]
-        public CodePassio_Core.Entities.Post Post { get; set; }
+        public CreatePostModel Post { get; set; }
+        public List<SelectListItem> CategoryList { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public class CreatePostModel
+        {
+            public string Title { get; set; }
+
+            public string Excerpt { get; set; }
+
+            public byte Status { get; set; }
+
+            public string Content { get; set; }
+
+            public string Tag { get; set; }
+
+            public Guid CategoryId { get; set; }
+        }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Posts.Add(Post);
-            await _context.SaveChangesAsync();
+            var post = _mapper.Map<CodePassio_Core.Entities.Post>(Post);
+            _postService.Create(post);
 
             return RedirectToPage("./Index");
         }
 
-        public async Task<IActionResult> OnPostDraftAsync()
+        public IActionResult OnPostDraft()
         {
-            _postService.CreateDraftAsync(Post);
+            var post = _mapper.Map<CodePassio_Core.Entities.Post>(Post);
+            _postService.CreateDraftAsync(post);
             return RedirectToPage("./Post");
         }
     }

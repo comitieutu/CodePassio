@@ -3,7 +3,7 @@
         <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
         <h5 class="centered">Sam Soffes</h5>
         <li class="mt">
-            <a class="active" href="index.html">
+            <a class="active" href="/Index">
                 <i class="fa fa-dashboard"></i>
                 <span>Dashboard</span>
             </a>
@@ -11,16 +11,25 @@
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-desktop"></i>
-                <span>UI Elements</span>
+                <span>Category management</span>
+                <i class="fa fa-angle-down pull-right"></i>
             </a>
             <ul class="sub">
-                <li><a href="general.html">General</a></li>
-                <li><a href="buttons.html">Buttons</a></li>
-                <li><a href="panels.html">Panels</a></li>
-                <li><a href="font_awesome.html">Font Awesome</a></li>
+                <li><a asp-page="/Category/Create">Create</a></li>
+                <li><a asp-page="/Category/index">List</a></li>
             </ul>
         </li>
-
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-desktop"></i>
+                <span>Tag management</span>
+                <i class="fa fa-angle-down pull-right"></i>
+            </a>
+            <ul class="sub">
+                <li><a asp-page="/Tag/Create">Create</a></li>
+                <li><a asp-page="/Tag/index">List</a></li>
+            </ul>
+        </li>
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-desktop"></i>

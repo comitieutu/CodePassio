@@ -7,16 +7,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace CodePassio_Admin.Controllers
 {
     public class UploadFilesController : Controller
     {
         private readonly IHostingEnvironment _environment;
+        private readonly IConfiguration _configuration;
 
-        public UploadFilesController(IHostingEnvironment IHostingEnvironment)
+        public UploadFilesController(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
-            _environment = IHostingEnvironment;
+            _environment = hostingEnvironment;
+            _configuration = configuration;
         }
         #region snippet1
         [HttpPost("UploadFiles")]
@@ -28,28 +31,31 @@ namespace CodePassio_Admin.Controllers
             var newFileName = string.Empty;
             var fileName = string.Empty;
             var returnUrl = string.Empty;
+            var filePath = _configuration["Image"];
 
             foreach (var formFile in upload)
             {
                 if (formFile.Length > 0)
                 {
-                    fileName = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim('"');
+                    //fileName = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim('"');
                     //Assigning Unique Filename (Guid)
-                    var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+                    //var myUniqueFileName = Convert.ToString(Guid.NewGuid());
 
                     //Getting file Extension
-                    var FileExtension = Path.GetExtension(fileName);
+                    //var FileExtension = Path.GetExtension(fileName);
 
                     // concating  FileName + FileExtension
-                    newFileName = myUniqueFileName + FileExtension;
+                    //newFileName = myUniqueFileName + FileExtension;
 
                     // Combines two strings into a path.
-                    fileName = Path.Combine(_environment.WebRootPath, "demoImages") + $@"\{newFileName}";
+                    //fileName = Path.Combine(_environment.WebRootPath, "demoImages") + $@"\{newFileName}";
 
                     // if you want to store path of folder in database
                     //PathDB = "demoImages/" + newFileName;
-                    returnUrl = $"{this.Request.Scheme}://{this.Request.Host.Value.ToString()}{this.Request.PathBase.Value.ToString()}/demoImages/{newFileName}";
-                    using (var stream = new FileStream(fileName, FileMode.Create))
+
+                    fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
+                    returnUrl = $"{this.Request.Scheme}://{this.Request.Host.Value.ToString()}{this.Request.PathBase.Value.ToString()}/Images/{fileName}";
+                    using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
                     {
                         await formFile.CopyToAsync(stream);
                     }

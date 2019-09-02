@@ -14,9 +14,9 @@ namespace CodePassio_Admin.Pages.Tag
 {
     public class IndexModel : PageModel
     {
-        private readonly IRepository<CodePassio_Core.Entities.Tag> _tagService;
+        private readonly TagService _tagService;
 
-        public IndexModel(IRepository<CodePassio_Core.Entities.Tag> tagService)
+        public IndexModel(TagService tagService)
         {
             _tagService = tagService;
         }

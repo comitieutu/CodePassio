@@ -10,15 +10,16 @@ using CodePassio_Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using CodePassio_Service.Interfaces;
 using AutoMapper;
+using CodePassio_Service.Services;
 
 namespace CodePassio_Admin.Pages.Category
 {
     public class CreateModel : PageModel
     {
-        private readonly IRepository<CodePassio_Core.Entities.Category> _categoryService;
+        private readonly CategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public CreateModel(IRepository<CodePassio_Core.Entities.Category> categoryService, IMapper mapper)
+        public CreateModel(CategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;
