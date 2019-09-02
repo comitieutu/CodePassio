@@ -8,7 +8,6 @@ using CodePassio_Core;
 using CodePassio_Core.Entities;
 using CodePassio_Service.Interfaces;
 using CodePassio_Service.Services;
-using CodePassio_Service.Services.Post;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -52,6 +51,7 @@ namespace CodePassio_Admin
 
             services.AddScoped<IRepository<Tag>, TagService>();
             services.AddScoped<IRepository<Category>, CategoryService>();
+            services.AddScoped<IRepository<Post>, PostService>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -68,7 +68,7 @@ namespace CodePassio_Admin
                 config.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAuthorization();
-            services.AddScoped<IPostService, PostService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
