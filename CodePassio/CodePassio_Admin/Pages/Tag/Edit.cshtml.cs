@@ -10,15 +10,16 @@ using CodePassio_Core;
 using CodePassio_Core.Entities;
 using AutoMapper;
 using CodePassio_Service.Interfaces;
+using CodePassio_Service.Services;
 
 namespace CodePassio_Admin.Pages.Tag
 {
     public class EditModel : PageModel
     {
-        private readonly IRepository<CodePassio_Core.Entities.Tag> _tagService;
+        private readonly TagService _tagService;
         private readonly IMapper _mapper;
 
-        public EditModel(IRepository<CodePassio_Core.Entities.Tag> tagService, IMapper mapper)
+        public EditModel(TagService tagService, IMapper mapper)
         {
             _tagService = tagService;
             _mapper = mapper;

@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodePassio_Service", "CodeP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodePassio_Web", "CodePassio_Web\CodePassio_Web.csproj", "{B42A3F13-505A-49E8-8AE4-BBFF163ABA48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodePassio_Admin", "CodePassio_Admin\CodePassio_Admin.csproj", "{53BC8CCD-01D4-42DD-9DC1-8865C27E4084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodePassio_Admin", "CodePassio_Admin\CodePassio_Admin.csproj", "{53BC8CCD-01D4-42DD-9DC1-8865C27E4084}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{FE4631CA-64FC-4A63-A3F1-CE26630369C9}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\multivendor_c#\Comi\img\fde39f9677874225b26adb4ca0e139fb.jpg = ..\..\multivendor_c#\Comi\img\fde39f9677874225b26adb4ca0e139fb.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

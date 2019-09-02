@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace CodePassio_Web
 {
@@ -72,6 +73,13 @@ namespace CodePassio_Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Configuration["Image"]),
+                RequestPath = new PathString("/images"),
+                EnableDirectoryBrowsing = false
+            });
+
             app.UseCookiePolicy();
 
             app.UseAuthentication();

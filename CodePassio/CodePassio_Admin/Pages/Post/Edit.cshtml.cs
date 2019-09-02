@@ -8,20 +8,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using CodePassio_Service.Services;
+using AutoMapper;
 
 namespace CodePassio_Admin.Pages.Post
 {
     public class EditModel : PageModel
     {
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly PostService _postService;
+        private readonly CategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public EditModel(CodePassio_Core.ApplicationDbContext context)
+        public EditModel(PostService postService, CategoryService categoryService, IMapper mapper)
         {
-            _context = context;
+            _postService = postService;
+            _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         [BindProperty]
-        public CodePassio_Core.Entities.Post Post { get; set; }
+        public EditPostModel Post { get; set; }
+        public List<SelectListItem> CategoryList { get; set; }
+
+        public class EditPostModel
+        {
+            public Guid Id { get; set; }
+            public string Title { get; set; }
+
+            public string Excerpt { get; set; }
+
+            public byte Status { get; set; }
+
+            public string Content { get; set; }
+
+            public string Tag { get; set; }
+
+            public Guid CategoryId { get; set; }
+        }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -30,33 +53,39 @@ namespace CodePassio_Admin.Pages.Post
                 return NotFound();
             }
 
-            Post = await _context.Posts
-                .Include(p => p.Category).FirstOrDefaultAsync(m => m.Id == id);
+            var post = await _postService.Entities
+                .Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
 
             if (Post == null)
             {
                 return NotFound();
             }
-           ViewData["CategoryId"] = new SelectList(_context.Set<CodePassio_Core.Entities.Category>(), "Id", "Id");
+
+            Post = _mapper.Map<EditPostModel>(Post);
+
+            CategoryList = new List<SelectListItem>();
+            var categoriesData = _categoryService.Get(c => c.Parent == Guid.Empty).AsNoTracking().ToList();
+            categoriesData.ForEach(c => CategoryList.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Post).State = EntityState.Modified;
+            var post = _mapper.Map<CodePassio_Core.Entities.Post>(Post);
 
             try
             {
-                await _context.SaveChangesAsync();
+                _postService.Edit(post);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PostExists(Post.Id))
+                if (!_postService.IsExist(Post.Id))
                 {
                     return NotFound();
                 }
@@ -67,11 +96,6 @@ namespace CodePassio_Admin.Pages.Post
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool PostExists(Guid id)
-        {
-            return _context.Posts.Any(e => e.Id == id);
         }
     }
 }

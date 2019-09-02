@@ -7,15 +7,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using CodePassio_Service.Interfaces;
+using CodePassio_Service.Services;
 
 namespace CodePassio_Admin.Pages.Category
 {
     public class IndexModel : PageModel
     {
-        private readonly IRepository<CodePassio_Core.Entities.Category> _categoryService;
+        private readonly CategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public IndexModel(IRepository<CodePassio_Core.Entities.Category> categoryService, IMapper mapper)
+        public IndexModel(CategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;

@@ -7,23 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using CodePassio_Service.Services;
 
 namespace CodePassio_Admin.Pages.Post
 {
     public class IndexModel : PageModel
     {
-        private readonly CodePassio_Core.ApplicationDbContext _context;
+        private readonly PostService _postService;
 
-        public IndexModel(CodePassio_Core.ApplicationDbContext context)
+        public IndexModel(PostService postService)
         {
-            _context = context;
+            _postService = postService;
         }
 
         public IList<CodePassio_Core.Entities.Post> Post { get;set; }
 
         public async Task OnGetAsync()
         {
-            Post = await _context.Posts
+            Post = await _postService.GetAll()
                 .Include(p => p.Category).ToListAsync();
         }
     }
