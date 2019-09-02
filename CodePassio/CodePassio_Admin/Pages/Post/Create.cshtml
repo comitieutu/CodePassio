@@ -43,13 +43,6 @@
                     <select asp-for="Post.CategoryId" class="form-control" asp-items="Model.CategoryList"></select>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input asp-for="Post.Deleted" />@Html.DisplayNameFor(model => model.Post.Deleted)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
                     <input type="submit" value="Save and Publish" class="btn btn-success"/>
                     <input type="submit" value="Save draft" class="btn btn-default btn-post-save-draft"  asp-page-handler="Draft"/>
                 </div>
