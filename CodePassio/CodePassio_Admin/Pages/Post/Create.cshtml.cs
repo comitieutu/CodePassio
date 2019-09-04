@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CodePassio_Service.Services;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using CodePassio_Service.Implementations;
 
 namespace CodePassio_Admin.Pages.Post
 {
