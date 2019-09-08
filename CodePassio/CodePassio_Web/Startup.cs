@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
+using CodePassio_Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +45,9 @@ namespace CodePassio_Web
 
             services.AddDefaultIdentity<ApplicationUser>().AddRoles<ApplicationRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<CategoryService>();
+            services.AddScoped<PostService>();
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {

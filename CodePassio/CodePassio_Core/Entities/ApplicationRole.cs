@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace CodePassio_Core.Entities
 {
-    public class ApplicationRole : IdentityRole
+    public class ApplicationRole : IdentityRole<Guid>
     {
 
         public ApplicationRole() : base() { }
