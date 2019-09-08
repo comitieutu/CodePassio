@@ -24,7 +24,7 @@ namespace CodePassio_Admin.Configurations
             CreateMap<EditTagModel, Tag>().ReverseMap();
 
             //Post
-            CreateMap<Post, CreatePostModel>();
+            CreateMap<Post, CreatePostModel>().ReverseMap();
             CreateMap<EditPostModel, Post>().ReverseMap();
         }
     }

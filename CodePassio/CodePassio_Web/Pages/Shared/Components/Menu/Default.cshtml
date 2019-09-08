@@ -1,0 +1,32 @@
+﻿@model IList<CodePassio_Core.Entities.Category>
+@{
+    var categorys = (List<CodePassio_Core.Entities.Category>)Model.Where(c => c.Deleted == false).ToList();
+}
+
+<nav class="header-nav">
+    <ul>
+        <li class="active"><a href="index.html" title="Start page">Start page</a></li>
+
+        @foreach (var item in categorys.Where(c => c.Parent == Guid.Empty))
+        {
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" title="Blog articles">@item.Name</a>
+                <ul class="dropdown-menu">
+                    @foreach (var i in categorys.Where(category => category.Parent == item.Id))
+                    {
+                        <li class="nav-elipse-blue">
+                            <a asp-page="/Post/List" asp-route-id="@i.Id" title="Blog CSS articles">@i.Name</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+
+        <li><a asp-page="/AboutMe" title="About me">About me</a></li>
+        <li>
+            <a asp-page="/Portfolio" title="My projects">My projects</a>
+        </li>
+        <li><a href="contact.html" title="Contact me">Contact me</a></li>
+        <li class="buyproducts-link"><a asp-page="Shop" title="Buy products">Buy products</a></li>
+    </ul>
+</nav>

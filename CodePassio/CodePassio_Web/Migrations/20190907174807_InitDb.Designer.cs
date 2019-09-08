@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodePassio_Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190824143305_initDb")]
-    partial class initDb
+    [Migration("20190907174807_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace CodePassio_Web.Migrations
 
             modelBuilder.Entity("CodePassio_Core.Entities.ApplicationRole", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
@@ -49,7 +49,7 @@ namespace CodePassio_Web.Migrations
 
             modelBuilder.Entity("CodePassio_Core.Entities.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -100,13 +100,13 @@ namespace CodePassio_Web.Migrations
 
             modelBuilder.Entity("CodePassio_Core.Entities.ApplicationUserRole", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<Guid>("UserId");
 
-                    b.Property<string>("RoleId");
+                    b.Property<Guid>("RoleId");
 
-                    b.Property<string>("RoleId1");
+                    b.Property<Guid?>("RoleId1");
 
-                    b.Property<string>("UserId1");
+                    b.Property<Guid?>("UserId1");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -146,6 +146,8 @@ namespace CodePassio_Web.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<Guid>("ApplicationUserId");
+
                     b.Property<string>("Content");
 
                     b.Property<DateTime>("CreatedDate");
@@ -158,6 +160,9 @@ namespace CodePassio_Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
+
                     b.HasIndex("PostId");
 
                     b.ToTable("Comments");
@@ -168,7 +173,7 @@ namespace CodePassio_Web.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApplicationUserId");
+                    b.Property<Guid?>("ApplicationUserId");
 
                     b.Property<Guid>("CategoryId");
 
@@ -203,6 +208,12 @@ namespace CodePassio_Web.Migrations
 
                     b.Property<Guid>("TagId");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<bool>("Deleted");
+
+                    b.Property<DateTime>("ModifiedDate");
+
                     b.HasKey("PostId", "TagId");
 
                     b.HasIndex("TagId");
@@ -228,7 +239,7 @@ namespace CodePassio_Web.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -238,8 +249,7 @@ namespace CodePassio_Web.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired();
+                    b.Property<Guid>("RoleId");
 
                     b.HasKey("Id");
 
@@ -248,7 +258,7 @@ namespace CodePassio_Web.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -258,8 +268,7 @@ namespace CodePassio_Web.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
 
@@ -268,7 +277,7 @@ namespace CodePassio_Web.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128);
@@ -278,8 +287,7 @@ namespace CodePassio_Web.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -288,9 +296,9 @@ namespace CodePassio_Web.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<Guid>("UserId");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128);
@@ -328,6 +336,11 @@ namespace CodePassio_Web.Migrations
 
             modelBuilder.Entity("CodePassio_Core.Entities.Comment", b =>
                 {
+                    b.HasOne("CodePassio_Core.Entities.ApplicationUser", "ApplicationUser")
+                        .WithOne("Comment")
+                        .HasForeignKey("CodePassio_Core.Entities.Comment", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CodePassio_Core.Entities.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
@@ -359,7 +372,7 @@ namespace CodePassio_Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("CodePassio_Core.Entities.ApplicationRole")
                         .WithMany()
@@ -367,7 +380,7 @@ namespace CodePassio_Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("CodePassio_Core.Entities.ApplicationUser")
                         .WithMany()
@@ -375,7 +388,7 @@ namespace CodePassio_Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("CodePassio_Core.Entities.ApplicationUser")
                         .WithMany()
@@ -383,7 +396,7 @@ namespace CodePassio_Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("CodePassio_Core.Entities.ApplicationUser")
                         .WithMany()

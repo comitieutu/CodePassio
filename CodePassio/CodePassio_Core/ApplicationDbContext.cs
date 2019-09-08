@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CodePassio_Core
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
-                                            ApplicationUserRole, IdentityUserLogin<string>,
-                                            IdentityRoleClaim<string>, IdentityUserToken<string>>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid, IdentityUserClaim<Guid>,
+                                            ApplicationUserRole, IdentityUserLogin<Guid>,
+                                            IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -57,6 +58,10 @@ namespace CodePassio_Core
                 .HasMany(c => c.Posts)
                 .WithOne(p => p.Category)
                 .HasForeignKey(p => p.CategoryId);
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(u => u.Comment)
+                .WithOne(c => c.ApplicationUser)
+                .HasForeignKey<Comment>(c => c.ApplicationUserId);
 
         }
     }

@@ -17,7 +17,7 @@ namespace CodePassio_Core
             await EnsureRole(serviceProvider, adminID, Role.SuperAdmin.ToString());
         }
 
-        private static async Task<string> EnsureUser(IServiceProvider serviceProvider,
+        private static async Task<Guid> EnsureUser(IServiceProvider serviceProvider,
                                                     string testUserPw, string UserName)
         {
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
@@ -33,7 +33,7 @@ namespace CodePassio_Core
         }
 
         private static async Task<IdentityResult> EnsureRole(IServiceProvider serviceProvider,
-                                                                      string uid, string role)
+                                                                      Guid uid, string role)
         {
             IdentityResult IR = null;
             var roleManager = serviceProvider.GetService<RoleManager<ApplicationRole>>();
@@ -42,7 +42,7 @@ namespace CodePassio_Core
                 if (!await roleManager.RoleExistsAsync(r))
                 {
                     IR = await roleManager.CreateAsync(new ApplicationRole(r));
-                }
+                }   
             }
             if (roleManager == null)
             {
@@ -56,7 +56,7 @@ namespace CodePassio_Core
 
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
 
-            var user = await userManager.FindByIdAsync(uid);
+            var user = await userManager.FindByIdAsync(uid.ToString());
 
             IR = await userManager.AddToRoleAsync(user, role);
 

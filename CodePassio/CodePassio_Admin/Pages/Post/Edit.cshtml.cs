@@ -56,15 +56,15 @@ namespace CodePassio_Admin.Pages.Post
             var post = await _postService.Entities
                 .Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
 
-            if (Post == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            Post = _mapper.Map<EditPostModel>(Post);
+            Post = _mapper.Map<EditPostModel>(post);
 
             CategoryList = new List<SelectListItem>();
-            var categoriesData = _categoryService.Get(c => c.Parent == Guid.Empty).AsNoTracking().ToList();
+            var categoriesData = _categoryService.Get(c => c.Parent != Guid.Empty).AsNoTracking().ToList();
             categoriesData.ForEach(c => CategoryList.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
 
             return Page();

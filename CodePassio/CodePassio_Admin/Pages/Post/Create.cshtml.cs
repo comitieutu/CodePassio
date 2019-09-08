@@ -27,7 +27,7 @@ namespace CodePassio_Admin.Pages.Post
         public IActionResult OnGet()
         {
             CategoryList = new List<SelectListItem>();
-            var categoriesData = _categoryService.Get(c => c.Parent == Guid.Empty).AsNoTracking().ToList();
+            var categoriesData = _categoryService.Get(c => c.Parent != Guid.Empty).AsNoTracking().ToList();
             categoriesData.ForEach(c => CategoryList.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
 
             return Page();
