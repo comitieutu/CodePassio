@@ -31,5 +31,22 @@ namespace CodePassio_Admin.Pages.Post
             DraftPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Draft).Include(p => p.Category).ToListAsync();
             DeletedPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Trash).Include(p => p.Category).ToListAsync();
         }
+
+        public IActionResult OnGetDelete(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var post = _postService.Get(id);
+
+            if (post != null)
+            {
+                _postService.Delete(id);
+            }
+
+            return RedirectToPage("./Index");
+        }
     }
 }
