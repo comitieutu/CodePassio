@@ -69,7 +69,7 @@ namespace CodePassio_Admin.Pages.Post
         {
             var post = _mapper.Map<CodePassio_Core.Entities.Post>(Post);
             _postService.CreateDraftAsync(post);
-            return RedirectToPage("./Post");
+            return RedirectToPage("./Index");
         }
     }
 }

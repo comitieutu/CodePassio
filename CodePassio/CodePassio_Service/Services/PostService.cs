@@ -12,16 +12,18 @@ namespace CodePassio_Service.Services
 {
     public class PostService : Repository<Post>
     {
+
         public PostService(ApplicationDbContext context) : base(context)
         {
         }
 
-        public async void CreateDraftAsync(CodePassio_Core.Entities.Post post)
+        public void CreateDraftAsync(CodePassio_Core.Entities.Post post)
         {            
             post.Status = (byte)PostStatus.Draft;
-
-            _context.Posts.Add(post);
-            await _context.SaveChangesAsync();
+            post.ModifiedDate = DateTime.Now;
+            this._context.Posts.Add(post);
+            this._context.Entry(post).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            this._context.SaveChanges();
         }
     }
 }

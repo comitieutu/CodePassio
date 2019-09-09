@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CodePassio_Core\CodePassio_Core.csproj" />
     <ProjectReference Include="..\CodePassio_Service\CodePassio_Service.csproj" />
+    <ProjectReference Include="..\CodePassio_Web\CodePassio_Web.csproj" />
   </ItemGroup>
 
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CodePassio_Core;
 using CodePassio_Core.Entities;
 using CodePassio_Service.Services;
+using CodePassio_Core.Enums;
 
 namespace CodePassio_Admin.Pages.Post
 {
@@ -20,12 +21,15 @@ namespace CodePassio_Admin.Pages.Post
             _postService = postService;
         }
 
-        public IList<CodePassio_Core.Entities.Post> Post { get;set; }
+        public IList<CodePassio_Core.Entities.Post> PublishedPost { get; set; }
+        public IList<CodePassio_Core.Entities.Post> DraftPost { get; set; }
+        public IList<CodePassio_Core.Entities.Post> DeletedPost { get; set; }
 
         public async Task OnGetAsync()
         {
-            Post = await _postService.GetAll()
-                .Include(p => p.Category).ToListAsync();
+            PublishedPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Publish).Include(p => p.Category).ToListAsync();
+            DraftPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Draft).Include(p => p.Category).ToListAsync();
+            DeletedPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Trash).Include(p => p.Category).ToListAsync();
         }
     }
 }
