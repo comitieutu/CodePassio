@@ -53,7 +53,9 @@
                                                 @foreach (var p in Model.PublishedPost)
                                                 {
                                                     <tr>
-                                                        <td>@p.Title</td>
+                                                        <td>
+                                                            <a asp-page="/Post/Details" asp-route-id="@p.Id">@p.Title </a>
+                                                        </td>
                                                         <td>@p.Excerpt</td>
                                                         <td>@p.Tag</td>
                                                         <td>@p.Category.Name</td>
@@ -100,7 +102,9 @@
                                                 @foreach (var p in Model.DraftPost)
                                                 {
                                                     <tr>
-                                                        <td>@p.Title</td>
+                                                        <td>
+                                                            <a asp-page="/Post/Details" asp-route-id="@p.Id">@p.Title </a>
+                                                        </td>
                                                         <td>@p.Excerpt</td>
                                                         <td>@p.Tag</td>
                                                         <td>@p.Category.Name</td>
@@ -147,7 +151,9 @@
                                                 @foreach (var p in Model.DeletedPost)
                                                 {
                                                     <tr>
-                                                        <td>@p.Title</td>
+                                                        <td>
+                                                            <a asp-page="/Post/Details" asp-route-id="@p.Id">@p.Title </a>
+                                                        </td>
                                                         <td>@p.Excerpt</td>
                                                         <td>@p.Tag</td>
                                                         <td>@p.Category.Name</td>
