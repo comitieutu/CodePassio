@@ -48,81 +48,11 @@
                         </div>
                         <div class="articles-content">
                             <h1 class="articles-content-blog-post-title">
-                                <a href="#" title="Keeping Your Business And Clients Safe With Digital Policies">
-                                    Keeping
-                                    Your Business And Clients Safe With Digital Policies
+                                <a href="#" title="@Model.Post.Title">
+                                    @Model.Post.Title
                                 </a>
                             </h1>
-                            <p>
-                                Now that we have our view and component layer, we need something to manage state and the lifecycle of our application. Redux is
-                                also a clear winner here.
-                            </p>
-                            <p>
-                                Alongside React, Facebook presented a design pattern for one way data flow called Flux. Flux largely delivered on its promise of
-                                simplifying state management, but it also brought with it more questions, such as how to store that state and where to do Ajax
-                                requests. To answer those questions, countless frameworks were built on top of the Flux pattern: Fluxible, Reflux, Alt, Flummox,
-                                Lux, Nuclear, Fluxxor and many, many more. One Flux-like implementation eventually caught the community’s attention, and for
-                                good reasons: Redux.
-                            </p>
-                            <blockquote class="secondary-quote">
-                                One thing to be careful is the natural instinct to try and abstract away the Redux boilerplate. There’s good reasons behind all
-                                those pieces. Make sure you tried it and understand the <strong>“why”</strong> before trying to blindly improve on it.
-                            </blockquote>
-
-                            <div class="articles-content-block">
-                                <h1>Why Javascript?</h1>
-                                <p>
-                                    JavaScript is the standard language of the web platform. Learning it will allow you to build any app you want for any device
-                                    or
-                                    platform you want. Watch this 1 minute video to learn more about what JavaScript can do for you:
-                                </p>
-                                <iframe class="vimeo-movie" src="https://player.vimeo.com/video/102553634" width="640" height="360" frameborder="0"
-                                        webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                <h3 class="list-title">The essentials in order:</h3>
-                                <ul>
-                                    <li><span class="italic">Newbie friendly:</span> Make a Star Wars Game with Hour of Code (free website)</li>
-                                    <li><span class="italic">Newbie friendly:</span> “JavaScript for Cats”, Max Ogden (free website)</li>
-                                    <li>
-                                        <span class="italic">Newbie friendly:</span> FreeCodeCamp’s 10-hour Basic JavaScript track You can come back to FCC for
-                                        more practice while you explore the rest of these resources. I recommend that you dedicate time to study other resources
-                                        and do some fresh FCC exercises every day. There are hundreds of hours of exercises, in total, covering a lot more than
-                                        just JavaScript.
-                                    </li>
-                                    <li><span class="italic">Newbie friendly:</span> “JavaScript for Cats”, Max Ogden (free website)</li>
-                                    <li>“Eloquent JavaScript: Second Edition”, Marijn Haverbeke (book with free online edition)</li>
-
-                                </ul>
-                            </div>
-
-                            <div class="articles-content-block">
-                                <h1>Why Universal?</h1>
-                                <p>
-                                    Nobody else has this understanding of the word isomorphic. Words are only useful if they communicate information, but they
-                                    can only communicate information if we can agree on their definition.
-                                </p>
-                                <p>
-                                    The troubling thing about the word “isomorphic” is that it already has a well understood definition in the context of
-                                    functional programming, one of the pillar paradigms of JavaScript.
-                                </p>
-                                <p>
-                                    Lots of people think of the mathematical / FP definition borrowed from category theory. An isomorphism is a pair of functions
-                                    (morphisms) such that:
-                                </p>
-
-                                <pre><code class="language-js">var Prism = require('prismjs');
-
-// The code snippet you want to highlight, as a string
-var code = "var data = 1;";
-
-// Returns a highlighted HTML string
-var html = Prism.highlight(code, Prism.languages.javascript);</code></pre>
-                                <p>
-                                    In JavaScript, variables outside the scope of a top-level function are global (meaning, everyone can access them). Because of
-                                    this, it’s common to have “namespace pollution”, where completely unrelated code shares global variables.
-                                </p>
-                                <pre><code class="language-js">example();</code></pre>
-                                <p>Good luck!</p>
-                            </div>
+                            @Model.Post.Content
                         </div>
                     </div>
 

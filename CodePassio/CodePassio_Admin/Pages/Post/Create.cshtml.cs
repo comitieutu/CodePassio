@@ -17,12 +17,14 @@ namespace CodePassio_Admin.Pages.Post
         private readonly PostService _postService;
         private readonly IMapper _mapper;
         private readonly CategoryService _categoryService;
+        private readonly TagService _tagService;
 
-        public CreateModel(PostService postService, IMapper mapper, CategoryService categoryService)
+        public CreateModel(PostService postService, IMapper mapper, CategoryService categoryService, TagService tagService)
         {
             _postService = postService;
             _mapper = mapper;
             _categoryService = categoryService;
+            _tagService = tagService;
         }
 
         [BindProperty]
@@ -77,6 +79,12 @@ namespace CodePassio_Admin.Pages.Post
             var post = _mapper.Map<CodePassio_Core.Entities.Post>(Post);
             _postService.CreateDraftAsync(post);
             return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnGetTag(string term)
+        {
+            List<string> tag = _tagService.GetAll().AsNoTracking().Select(t => t.Name).ToList();
+            return new JsonResult(tag);
         }
     }
 }

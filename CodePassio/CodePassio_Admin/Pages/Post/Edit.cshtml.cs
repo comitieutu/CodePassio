@@ -53,7 +53,7 @@ namespace CodePassio_Admin.Pages.Post
                 return NotFound();
             }
 
-            var post = await _postService.Entities
+            var post = await _postService.Entities.AsNoTracking()
                 .Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
 
             if (post == null)
