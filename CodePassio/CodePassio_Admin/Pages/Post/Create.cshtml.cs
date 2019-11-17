@@ -8,6 +8,7 @@ using CodePassio_Service.Services;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using CodePassio_Service.Implementations;
+using System.ComponentModel.DataAnnotations;
 
 namespace CodePassio_Admin.Pages.Post
 {
@@ -26,6 +27,31 @@ namespace CodePassio_Admin.Pages.Post
             _tagService = tagService;
         }
 
+        [BindProperty]
+        public CreatePostModel Post { get; set; }
+        public List<SelectListItem> CategoryList { get; set; }
+
+        public class CreatePostModel
+        {
+            [Required]
+            [StringLength(50)]
+            public string Title { get; set; }
+
+            [Required]
+            [StringLength(300)]
+            public string Excerpt { get; set; }
+
+            public byte Status { get; set; }
+
+            [Required]
+            [StringLength(1000)]
+            public string Content { get; set; }
+
+            public string Tag { get; set; }
+
+            public Guid CategoryId { get; set; }
+        }
+
         public IActionResult OnGet()
         {
             CategoryList = new List<SelectListItem>();
@@ -33,25 +59,6 @@ namespace CodePassio_Admin.Pages.Post
             categoriesData.ForEach(c => CategoryList.Add(new SelectListItem { Value = c.Id.ToString(), Text = c.Name }));
 
             return Page();
-        }
-
-        [BindProperty]
-        public CreatePostModel Post { get; set; }
-        public List<SelectListItem> CategoryList { get; set; }
-
-        public class CreatePostModel
-        {
-            public string Title { get; set; }
-
-            public string Excerpt { get; set; }
-
-            public byte Status { get; set; }
-
-            public string Content { get; set; }
-
-            public string Tag { get; set; }
-
-            public Guid CategoryId { get; set; }
         }
 
         public IActionResult OnPost()

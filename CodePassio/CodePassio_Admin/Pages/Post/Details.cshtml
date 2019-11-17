@@ -1,73 +1,60 @@
 ﻿@page
 @model CodePassio_Admin.Pages.Post.DetailsModel
+@using CodePassio_Core.Enums;
 
 @{
     ViewData["Title"] = "Details";
 }
+<!-- page start-->
+<div class="row mt">
 
-<h2>Details</h2>
+    <div class="col-sm-9">
+        <section class="panel">
+            <header class="panel-heading wht-bg">
+                @*<h4 class="gen-case">
+                        View Message
+                        <form action="#" class="pull-right mail-src-position">
+                            <div class="input-append">
+                                <input type="text" class="form-control " placeholder="Search Mail">
+                            </div>
+                        </form>
+                    </h4>*@
+            </header>
+            <div class="panel-body ">
+                <div class="mail-header row">
+                    <div class="col-md-12">
+                        <h4 class="line">@Model.Post.Title</h4>
+                        <small>Last modified: @Model.Post.ModifiedDate</small>
+                    </div>
+                </div>
+                <div class="mail-sender">
+                    <div class="row">
+                        <div class="col col-md-12">
+                            @Model.Post.Excerpt
+                        </div>
+                    </div>
+                </div>
+                <div class="view-mail">
+                    @Html.Raw(Model.Post.Content)
+                </div>
+                <div class="compose-btn pull-left">
+                    <a asp-page="./Index" class="btn btn-sm btn-theme"><i class="fa fa-reply"></i>&nbsp;Back to list</a>
+                    <a asp-page="./Edit" asp-route-id="@Model.Post.Id" class="btn btn-sm btn-primary" title="Edit or publish post">Edit</a>
 
-<div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Excerpt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Excerpt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Status)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Content)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Content)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Tag)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Tag)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Category)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Category.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Deleted)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.Deleted)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.CreatedDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.CreatedDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.ModifiedDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.ModifiedDate)
-        </dd>
-    </dl>
+                    <a asp-page="/Post/Index" asp-route-id="@Model.Post.Id" asp-page-handler="Delete" class="btn btn-sm tooltips btn-delete-post" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title="" onclick="return showDeleteConfirm();"><i class="fa fa-trash-o"></i></a>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Post.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+            </div>
+        </section>
+    </div>
 </div>
+
+@section Scripts{
+    <script>
+
+        function showDeleteConfirm() {
+            return confirm("Are you want to deleted this post");
+        }
+
+    </script>
+
+}
