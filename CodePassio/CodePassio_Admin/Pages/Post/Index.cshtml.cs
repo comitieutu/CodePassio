@@ -9,6 +9,7 @@ using CodePassio_Core;
 using CodePassio_Core.Entities;
 using CodePassio_Service.Services;
 using CodePassio_Core.Enums;
+using CodePassio_Service.Helpers;
 
 namespace CodePassio_Admin.Pages.Post
 {
@@ -21,15 +22,70 @@ namespace CodePassio_Admin.Pages.Post
             _postService = postService;
         }
 
-        public IList<CodePassio_Core.Entities.Post> PublishedPost { get; set; }
-        public IList<CodePassio_Core.Entities.Post> DraftPost { get; set; }
-        public IList<CodePassio_Core.Entities.Post> DeletedPost { get; set; }
+        public PaginatedList<CodePassio_Core.Entities.Post> PublishedPost { get; set; }
+        public PaginatedList<CodePassio_Core.Entities.Post> DraftPost { get; set; }
+        public PaginatedList<CodePassio_Core.Entities.Post> DeletedPost { get; set; }
 
-        public async Task OnGetAsync()
+        public string TitleSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
+        public int PageSize { get; set; }
+
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, int pageSize = 10)
         {
-            PublishedPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Publish).Include(p => p.Category).ToListAsync();
-            DraftPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Draft).Include(p => p.Category).ToListAsync();
-            DeletedPost = await _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Trash).Include(p => p.Category).ToListAsync();
+            PageSize = pageSize;
+            CurrentSort = sortOrder;
+            if (String.IsNullOrEmpty(sortOrder))
+            {
+                TitleSort = "title_desc";
+            }
+            else
+            {
+                TitleSort = sortOrder == "title_desc" ? "title_asc" : "title_desc";
+            }
+            
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            CurrentFilter = searchString;
+
+            var publishedPost = _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Publish).Include(p => p.Category).AsQueryable();
+            var draftPost =  _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Draft).Include(p => p.Category).AsQueryable();
+            var deletedPost = _postService.GetAll().Where(p => p.Status == (byte)PostStatus.Trash).Include(p => p.Category).AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                publishedPost = publishedPost.Where(p => p.Title.Contains(searchString));
+                draftPost = draftPost.Where(p => p.Title.Contains(searchString));
+                deletedPost = deletedPost.Where(p => p.Title.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    publishedPost = publishedPost.OrderByDescending(p => p.Title);
+                    draftPost = draftPost.OrderByDescending(p => p.Title);
+                    deletedPost = deletedPost.OrderByDescending(p => p.Title);
+                    break;
+                case "title_asc":
+                    publishedPost = publishedPost.OrderBy(p => p.Title);
+                    draftPost = draftPost.OrderBy(p => p.Title);
+                    deletedPost = deletedPost.OrderBy(p => p.Title);
+                    break;
+                default:
+                    publishedPost = publishedPost.OrderByDescending(p => p.ModifiedDate);
+                    draftPost = draftPost.OrderByDescending(p => p.ModifiedDate);
+                    deletedPost = deletedPost.OrderByDescending(p => p.ModifiedDate);
+                    break;
+            }
+
+            PublishedPost = await PaginatedList<CodePassio_Core.Entities.Post>.CreateAsync(publishedPost, pageIndex ?? 1, pageSize);
+            DraftPost = await PaginatedList<CodePassio_Core.Entities.Post>.CreateAsync(draftPost, pageIndex ?? 1, pageSize);
+            DeletedPost = await PaginatedList<CodePassio_Core.Entities.Post>.CreateAsync(deletedPost, pageIndex ?? 1, pageSize);
         }
 
         public IActionResult OnGetDelete(Guid id)
@@ -43,7 +99,8 @@ namespace CodePassio_Admin.Pages.Post
 
             if (post != null)
             {
-                _postService.Delete(id);
+                post.Status = (byte)PostStatus.Trash;
+                _postService.DeleteEntity(post);
             }
 
             return RedirectToPage("./Index");

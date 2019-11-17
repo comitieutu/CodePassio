@@ -48,6 +48,7 @@ namespace CodePassio_Web
 
             services.AddScoped<CategoryService>();
             services.AddScoped<PostService>();
+            services.AddScoped<TagService>();
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {

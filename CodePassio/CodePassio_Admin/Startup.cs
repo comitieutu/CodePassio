@@ -54,6 +54,7 @@ namespace CodePassio_Admin
             services.AddScoped<CategoryService>();
             services.AddScoped<PostService>();
             services.AddScoped<CommentService>();
+            services.AddScoped<UserService>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {

@@ -42,9 +42,9 @@
 
                         <!-- TEXT ARTICLE -->
                         <div class="articles-header">
-                            <time datetime="2016-10-11">12 hours ago</time>
+                            <time datetime="2016-10-11">@Model.Post.ModifiedDate.ToShortDateString()</time>
                             <span class="articles-header-tag-green">New</span>
-                            <span class="articles-header-category"><a href="#" class="green" title="">Graphic</a></span>
+                            <span class="articles-header-category"><a href="#" class="green" title="">@Model.Post.Category.Name</a></span>
                         </div>
                         <div class="articles-content">
                             <h1 class="articles-content-blog-post-title">
@@ -52,7 +52,10 @@
                                     @Model.Post.Title
                                 </a>
                             </h1>
-                            @Model.Post.Content
+                            <div>
+                                @Html.Raw(Model.Post.Content)
+                            </div>
+                            
                         </div>
                     </div>
 
@@ -261,4 +264,6 @@
         </section>
     </div>
 </main>
-<!-- end MAIN -->
+@section scripts{
+
+}

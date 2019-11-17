@@ -7,6 +7,7 @@ using static CodePassio_Admin.Pages.Post.CreateModel;
 using static CodePassio_Admin.Pages.Post.EditModel;
 using static CodePassio_Admin.Pages.Tag.CreateModel;
 using static CodePassio_Admin.Pages.Tag.EditModel;
+using static CodePassio_Admin.Pages.User.IndexModel;
 
 namespace CodePassio_Admin.Configurations
 {
@@ -26,6 +27,9 @@ namespace CodePassio_Admin.Configurations
             //Post
             CreateMap<Post, CreatePostModel>().ReverseMap();
             CreateMap<EditPostModel, Post>().ReverseMap();
+
+            //User
+            CreateMap<ApplicationUser, UserListViewModel>();
         }
     }
 }
