@@ -11,9 +11,12 @@ namespace CodePassio_Core.Entities
         DateTime ModifiedDate { get; set; }
     }
 
-    public abstract class BaseEntity : Entity
+    public abstract class BaseEntity : IEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
+        public bool Deleted { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime ModifiedDate { get; set; }
     }
     public abstract class Entity : IEntity
     {

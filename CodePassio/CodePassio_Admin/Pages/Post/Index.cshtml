@@ -7,171 +7,258 @@
 
 <h2>Post list</h2>
 
-    <div class="col-lg-12 mt">
-        <a class="btn btn-success" asp-page="Create">Create New</a>
-    </div>
-    <div class="col-lg-12 mt">
-        <div class="row content-panel">
-            <div class="panel-heading">
-                <ul class="nav nav-tabs nav-justified">
-                    <li class="active">
-                        <a data-toggle="tab" href="#overview">Published&nbsp;&nbsp;<span class="badge bg-info">@Model.PublishedPost.Count</span></a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#contact" class="contact-map">Draft&nbsp;&nbsp;<span class="badge bg-warning">@Model.DraftPost.Count</span></a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#edit" class="text-danger">Deleted posts&nbsp;&nbsp;<span class="badge bg-danger">@Model.DeletedPost.Count</span></a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /panel-heading -->
-            <div class="panel-body">
-                <div class="tab-content">
-                    <div id="overview" class="tab-pane active">
-                        <div class="row">
-                            <div class="text-info">
-                                <h4>All publish posts</h4>
-                            </div>
-                            <div class="row mt">
-                                <div class="col-md-12">
-                                    <div class="content-panel">
-                                        <table class="table table-striped table-advance table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><i class="fa fa-bullhorn"></i> Title</th>
-                                                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Excerpt</th>
-                                                    <th><i class="fa fa-windows"></i> Tag</th>
-                                                    <th><i class="fa fa-windows"></i> Category</th>
-                                                    <th><i class="fa fa-windows"></i> IsDeleted</th>
-                                                    <th><i class="fa fa-windows"></i> CreatedDate</th>
-                                                    <th><i class="fa fa-windows"></i> ModifiedDate</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var p in Model.PublishedPost)
-                                                {
-                                                    <tr>
-                                                        <td>@p.Title</td>
-                                                        <td>@p.Excerpt</td>
-                                                        <td>@p.Tag</td>
-                                                        <td>@p.Category.Name</td>
-                                                        <td>@p.Deleted</td>
-                                                        <td>@p.CreatedDate</td>
-                                                        <td>@p.ModifiedDate</td>
-                                                        <td>
-                                                            <a asp-page="/Post/Edit" asp-route-id="@p.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                            <a asp-page="/Post/Index" asp-route-id="@p.Id" asp-page-handler="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /OVERVIEW -->
-                    </div>
-                    <!-- /tab-pane -->
-                    <div id="contact" class="tab-pane">
-                        <div class="row">
-                            <div class="text-info">
-                                <h4>Draft posts</h4>
-                            </div>
-                            <div class="row mt">
-                                <div class="col-md-12">
-                                    <div class="content-panel">
-                                        <table class="table table-striped table-advance table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><i class="fa fa-bullhorn"></i> Title</th>
-                                                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Excerpt</th>
-                                                    <th><i class="fa fa-windows"></i> Tag</th>
-                                                    <th><i class="fa fa-windows"></i> Category</th>
-                                                    <th><i class="fa fa-windows"></i> IsDeleted</th>
-                                                    <th><i class="fa fa-windows"></i> CreatedDate</th>
-                                                    <th><i class="fa fa-windows"></i> ModifiedDate</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var p in Model.DraftPost)
-                                                {
-                                                    <tr>
-                                                        <td>@p.Title</td>
-                                                        <td>@p.Excerpt</td>
-                                                        <td>@p.Tag</td>
-                                                        <td>@p.Category.Name</td>
-                                                        <td>@p.Deleted</td>
-                                                        <td>@p.CreatedDate</td>
-                                                        <td>@p.ModifiedDate</td>
-                                                        <td>
-                                                            <a asp-page="/Post/Edit" asp-route-id="@p.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                            <a asp-page="/Post/Index" asp-route-id="@p.Id" asp-page-handler="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /tab-pane -->
-                    <div id="edit" class="tab-pane">
-                        <div class="row">
-                            <div class="text-info">
-                                <h4>All deleted posts</h4>
-                            </div>
-                            <div class="row mt">
-                                <div class="col-md-12">
-                                    <div class="content-panel">
-                                        <table class="table table-striped table-advance table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><i class="fa fa-bullhorn"></i> Title</th>
-                                                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Excerpt</th>
-                                                    <th><i class="fa fa-windows"></i> Tag</th>
-                                                    <th><i class="fa fa-windows"></i> Category</th>
-                                                    <th><i class="fa fa-windows"></i> IsDeleted</th>
-                                                    <th><i class="fa fa-windows"></i> CreatedDate</th>
-                                                    <th><i class="fa fa-windows"></i> ModifiedDate</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var p in Model.DeletedPost)
-                                                {
-                                                    <tr>
-                                                        <td>@p.Title</td>
-                                                        <td>@p.Excerpt</td>
-                                                        <td>@p.Tag</td>
-                                                        <td>@p.Category.Name</td>
-                                                        <td>@p.Deleted</td>
-                                                        <td>@p.CreatedDate</td>
-                                                        <td>@p.ModifiedDate</td>
-                                                        <td>
-                                                            <a asp-page="/Post/Edit" asp-route-id="@p.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /tab-pane -->
+<div class="col-lg-12 mt">
+    <a class="btn btn-success" asp-page="Create">Create New</a>
+</div>
+<div class="row mt">
+    <div class="col-lg-12">
+        <div class="form-panel">
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Search</h4>
+            <form class="form-inline" role="form" asp-page="./Index" method="get">
+                <div class="form-group">
+                    <input type="text" name="SearchString" value="@Model.CurrentFilter" class="form-control" placeholder="Enter title">
                 </div>
-                <!-- /tab-content -->
-            </div>
-            <!-- /panel-body -->
+                <button type="submit" class="btn btn-theme">Search</button>
+            </form>
         </div>
-        <!-- /col-lg-12 -->
     </div>
+</div>
+<div class="col-lg-12 mt">
+    <div class="row content-panel">
+        <div class="panel-heading">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active">
+                    <a data-toggle="tab" href="#overview">Published&nbsp;&nbsp;<span class="badge bg-info">@Model.PublishedPost.Count</span></a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#contact" class="contact-map">Draft&nbsp;&nbsp;<span class="badge bg-warning">@Model.DraftPost.Count</span></a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#edit" class="text-danger">Deleted posts&nbsp;&nbsp;<span class="badge bg-danger">@Model.DeletedPost.Count</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="panel-body">
+            <div class="tab-content">
+                <div id="overview" class="tab-pane active">
+                    <div class="row">
+                        <div class="text-info">
+                            <h4>All publish posts</h4>
+                        </div>
+                        <div class="row mt">
+                            <div class="col-md-12">
+                                <div class="content-panel">
+                                    <table class="table table-striped table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <i class="fa fa-bullhorn"></i>
+                                                    <a asp-page="./Index" asp-route-sortOrder="@Model.TitleSort" asp-route-currentFilter="@Model.CurrentFilter"> Title</a>
+                                                </th>
+                                                <th class="hidden-phone"><i class="fa fa-question-circle"></i> Excerpt</th>
+                                                <th><i class="fa fa-windows"></i> Tag</th>
+                                                <th><i class="fa fa-windows"></i> Category</th>
+                                                <th><i class="fa fa-windows"></i> CreatedDate</th>
+                                                <th><i class="fa fa-windows"></i> ModifiedDate</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var p in Model.PublishedPost)
+                                            {
+                                                <tr>
+                                                    <td>@p.Title</td>
+                                                    <td>@p.Excerpt</td>
+                                                    <td>@p.Tag</td>
+                                                    <td>@p.Category.Name</td>
+                                                    <td>@p.CreatedDate</td>
+                                                    <td>@p.ModifiedDate</td>
+                                                    <td>
+                                                        <a asp-page="/Post/Edit" asp-route-id="@p.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                        <a asp-page="/Post/Index" asp-route-id="@p.Id" asp-page-handler="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @{
+                                        var prevDisabledPublishedPost = !Model.PublishedPost.HasPreviousPage ? "disabled" : "";
+                                        var nextDisabledPublishedPost = !Model.PublishedPost.HasNextPage ? "disabled" : "";
+                                    }
+
+                                    <a asp-page="./Index"
+                                       asp-route-sortOrder="@Model.CurrentSort"
+                                       asp-route-pageIndex="@(Model.PublishedPost.PageIndex - 1)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       class="btn btn-primary @prevDisabledPublishedPost">
+                                        Previous
+                                    </a>
+                                    <a asp-page="./Index"
+                                       asp-route-sortOrder="@Model.CurrentSort"
+                                       asp-route-pageIndex="@(Model.PublishedPost.PageIndex + 1)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       class="btn btn-primary @nextDisabledPublishedPost">
+                                        Next
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /tab-pane -->
+                <div id="contact" class="tab-pane">
+                    <div class="row">
+                        <div class="text-info">
+                            <h4>Draft posts</h4>
+                        </div>
+                        <div class="row mt">
+                            <div class="col-md-12">
+                                <div class="content-panel">
+                                    <table class="table table-striped table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th><i class="fa fa-bullhorn"></i> Title</th>
+                                                <th class="hidden-phone"><i class="fa fa-question-circle"></i> Excerpt</th>
+                                                <th><i class="fa fa-windows"></i> Tag</th>
+                                                <th><i class="fa fa-windows"></i> Category</th>
+                                                <th><i class="fa fa-windows"></i> CreatedDate</th>
+                                                <th><i class="fa fa-windows"></i> ModifiedDate</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var p in Model.DraftPost)
+                                            {
+                                                <tr>
+                                                    <td>@p.Title</td>
+                                                    <td>@p.Excerpt</td>
+                                                    <td>@p.Tag</td>
+                                                    <td>@p.Category.Name</td>
+                                                    <td>@p.CreatedDate</td>
+                                                    <td>@p.ModifiedDate</td>
+                                                    <td>
+                                                        <a asp-page="/Post/Edit" asp-route-id="@p.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                        <a asp-page="/Post/Index" asp-route-id="@p.Id" asp-page-handler="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @{
+                                        var prevDisabledDraftPost = !Model.DraftPost.HasPreviousPage ? "disabled" : "";
+                                        var nextDisabledDraftPost = !Model.DraftPost.HasNextPage ? "disabled" : "";
+                                    }
+
+                                    <a asp-page="./Index"
+                                       asp-route-sortOrder="@Model.CurrentSort"
+                                       asp-route-pageIndex="@(Model.DraftPost.PageIndex - 1)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       class="btn btn-primary @prevDisabledDraftPost">
+                                        Previous
+                                    </a>
+                                    <a asp-page="./Index"
+                                       asp-route-sortOrder="@Model.CurrentSort"
+                                       asp-route-pageIndex="@(Model.DraftPost.PageIndex + 1)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       class="btn btn-primary @nextDisabledDraftPost">
+                                        Next
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /tab-pane -->
+                <div id="edit" class="tab-pane">
+                    <div class="row">
+                        <div class="text-info">
+                            <h4>All deleted posts</h4>
+                        </div>
+                        <div class="row mt">
+                            <div class="col-md-12">
+                                <div class="content-panel">
+                                    <table class="table table-striped table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th><i class="fa fa-bullhorn"></i> Title</th>
+                                                <th class="hidden-phone"><i class="fa fa-question-circle"></i> Excerpt</th>
+                                                <th><i class="fa fa-windows"></i> Tag</th>
+                                                <th><i class="fa fa-windows"></i> Category</th>
+                                                <th><i class="fa fa-windows"></i> CreatedDate</th>
+                                                <th><i class="fa fa-windows"></i> ModifiedDate</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var p in Model.DeletedPost)
+                                            {
+                                                <tr>
+                                                    <td>@p.Title</td>
+                                                    <td>@p.Excerpt</td>
+                                                    <td>@p.Tag</td>
+                                                    <td>@p.Category.Name</td>
+                                                    <td>@p.CreatedDate</td>
+                                                    <td>@p.ModifiedDate</td>
+                                                    <td>
+                                                        <a asp-page="/Post/Edit" asp-route-id="@p.Id" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @{
+                                        var prevDisabledDeletedPost = !Model.DeletedPost.HasPreviousPage ? "disabled" : "";
+                                        var nextDisabledDeletedPost = !Model.DeletedPost.HasNextPage ? "disabled" : "";
+                                    }
+
+                                    <a asp-page="./Index"
+                                       asp-route-sortOrder="@Model.CurrentSort"
+                                       asp-route-pageIndex="@(Model.DeletedPost.PageIndex - 1)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       class="btn btn-primary @prevDisabledDeletedPost">
+                                        Previous
+                                    </a>
+                                    <a asp-page="./Index"
+                                       asp-route-sortOrder="@Model.CurrentSort"
+                                       asp-route-pageIndex="@(Model.DeletedPost.PageIndex + 1)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       class="btn btn-primary @nextDisabledDeletedPost">
+                                        Next
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /tab-pane -->
+            </div>
+            <!-- /tab-content -->
+        </div>
+
+        <div>
+            <form asp-page="./Index" method="get" id="pageSizeForm">
+                <input type="hidden" name="searchString" value="@Model.CurrentFilter" />
+                <label>
+                    <select id="pageSize" name="pageSize">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select> records per page
+                </label>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+        $("#pageSize").val(@Model.PageSize);
+        $("#pageSize").change(function (e) {
+            $('#pageSizeForm').submit();
+        })
+    })
+    </script>
+}

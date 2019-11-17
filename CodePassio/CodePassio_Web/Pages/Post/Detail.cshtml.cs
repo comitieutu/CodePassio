@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CodePassio_Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodePassio_Web.Pages.Post
 {
@@ -23,7 +24,7 @@ namespace CodePassio_Web.Pages.Post
                 return NotFound();
             }
 
-            Post = _postService.Get(id);
+            Post = _postService.Get(p => p.Id == id).Include(p => p.Category).FirstOrDefault();
 
             return Page();
         }

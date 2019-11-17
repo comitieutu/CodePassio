@@ -9,7 +9,7 @@ using CodePassio_Core;
 
 namespace CodePassio_Service.Implementations
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly ApplicationDbContext _context;
         protected DbSet<T> EntitySet => _context.Set<T>();
@@ -44,28 +44,28 @@ namespace CodePassio_Service.Implementations
         public void Delete(params object[] keyValues)
         {
             var entity = Get(keyValues);
-            entity.Deleted = true;
+            //entity.Deleted = true;
             Edit(entity);
         }
 
-        public int Delete(Expression<Func<T, bool>> predicate)
-        {
-            var entities = Get(predicate);
-            entities.ToList().ForEach(DeleteEntity);
-            return entities.Count();
-        }
+        //public int Delete(Expression<Func<T, bool>> predicate)
+        //{
+        //    var entities = Get(predicate);
+        //    entities.ToList().ForEach(DeleteEntity);
+        //    return entities.Count();
+        //}
 
         public void Edit(T entity)
         {
-            entity.ModifiedDate = DateTime.Now;
+            //entity.ModifiedDate = DateTime.Now;
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
-        private void DeleteEntity(T entity)
+        public void DeleteEntity(T entity)
         {
             //_context.Entry(entity).State = EntityState.Deleted;
-            entity.Deleted = true;
+            //entity.Deleted = true;
             Edit(entity);
         }
         public EntityEntry GetTracking(T entity)
@@ -74,7 +74,7 @@ namespace CodePassio_Service.Implementations
         }
         public bool IsExist(Guid id)
         {
-            return Entities.Any(e => e.Id == id);
+            return Entities.Contains(Get(id));
         }
     }
 }

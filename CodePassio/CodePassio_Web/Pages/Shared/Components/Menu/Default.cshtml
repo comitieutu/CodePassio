@@ -5,7 +5,7 @@
 
 <nav class="header-nav">
     <ul>
-        <li class="active"><a href="index.html" title="Start page">Start page</a></li>
+        <li class="active"><a href="/Index" title="Start page">Home page</a></li>
 
         @foreach (var item in categorys.Where(c => c.Parent == Guid.Empty))
         {
@@ -26,7 +26,6 @@
         <li>
             <a asp-page="/Portfolio" title="My projects">My projects</a>
         </li>
-        <li><a href="contact.html" title="Contact me">Contact me</a></li>
         <li class="buyproducts-link"><a asp-page="Shop" title="Buy products">Buy products</a></li>
     </ul>
 </nav>

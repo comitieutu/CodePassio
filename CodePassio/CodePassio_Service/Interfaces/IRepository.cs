@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace CodePassio_Service.Interfaces
 {
-    public interface IRepository<T>
+    public interface IRepository<T> 
     {
         IQueryable<T> Entities { get; }
 
@@ -21,7 +21,7 @@ namespace CodePassio_Service.Interfaces
 
         void Delete(params object[] keyValues);
 
-        int Delete(Expression<Func<T, bool>> predicate);
+        //int Delete(Expression<Func<T, bool>> predicate);
         EntityEntry GetTracking(T entity);
         bool IsExist(Guid id);
     }

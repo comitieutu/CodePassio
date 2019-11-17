@@ -4,9 +4,6 @@
     ViewData["Title"] = "Home page";
 }
 
-
-<!-- end MOBILE NAVIGATION -->
-<!-- BANNER POSTS -->
 <section class="banners">
     <div class="container">
         <div class="row">
@@ -78,8 +75,7 @@
         </div>
     </div>
 </section>
-<!-- end BANNER POSTS -->
-<!-- MAIN -->
+
 <main>
     <div class="container">
         <div class="row">
@@ -87,119 +83,37 @@
             <!-- ARTICLES -->
             <div class="col-lg-8 col-xs-12">
                 <section class="articles">
-                    <article class="blue-article">
-                        <div class="articles-header">
-                            <time datetime="2016-10-11">12 hours ago</time>
-                            <span class="articles-header-tag-blue">Hot</span>
-                            <span class="articles-header-category"><a href="#" class="blue" title="">CSS</a></span>
-                        </div>
-                        <div class="articles-content">
-                            <h1>
-                                <a href="blog_post.html" title="">
-                                    10 Interview Questions Every JavaScript Developer
-                                    Should Know
-                                </a>
-                            </h1>
-                            <p>
-                                I was young, single, and freshly employed to direct National Journal’s Presentation
-                                Center, a searchable library of white-label
-                                PowerPoint presentations on political and policy developments. By day, I led a team of
-                                fellows in creating data
-                                visualizations...
-                            </p>
-                        </div>
-                        <div class="articles-footer">
-                            <ul class="articles-footer-info">
-                                <li>
-                                    <a href="#" class="light-link" title=""><i class="pe-7s-comment"></i> 7 Response</a>
-                                </li>
-                                <li><a href="#" class="light-link" title=""><i class="pe-7s-like"></i> 1221</a></li>
-                            </ul>
-                            <a title="" class="btn" href="blog_post.html">Read more</a>
+                    @foreach (var p in Model.Posts)
+                    {
+                        <article class="blue-article">
+                            <div class="articles-header">
+                                <time datetime="2016-10-11">@p.ModifiedDate.ToShortDateString()</time>
+                                <span class="articles-header-tag-blue">Hot</span>
+                                <span class="articles-header-category"><a asp-page="/Post/List" asp-route-id="@p.CategoryId" class="blue" title="">@p.Category.Name</a></span>
+                            </div>
+                            <div class="articles-content">
+                                <h1>
+                                    <a asp-page="/Post/Detail" asp-route-id="@p.Id" title="">
+                                        @p.Title
+                                    </a>
+                                </h1>
+                                <p>
+                                    @p.Excerpt
+                                </p>
+                            </div>
+                            <div class="articles-footer">
+                                <ul class="articles-footer-info">
+                                    <li>
+                                        <a href="#" class="light-link" title=""><i class="pe-7s-comment"></i> @p.Comments.Count Response</a>
+                                    </li>
+                                    @*<li><a href="#" class="light-link" title=""><i class="pe-7s-like"></i> 1221</a></li>*@
+                                </ul>
+                                <a title="" class="btn" asp-page="/Post/Detail" asp-route-id="@p.Id">Read more</a>
 
-                        </div>
-                    </article>
+                            </div>
+                        </article>
+                    }
 
-                    <article class="red-article">
-                        <div class="articles-header">
-                            <time datetime="2016-10-11">January 16, 2016</time>
-                            <span class="articles-header-category">
-                                <a href="#" class="red"
-                                   title="">Javascript</a>
-                            </span>
-                        </div>
-                        <div class="articles-content">
-                            <h1><a href="blog_post.html" title="">State of the Art JavaScript in 2016</a></h1>
-                            <p>
-                                Class in JS is not harmless sugar for prototypal OO. Class is a virus that infects
-                                everything it touches. It came to us formally
-                                in
-                                JavaScript with ES6, and at the same time, React was taking off. Lots of people started
-                                using classes for React components...
-                            </p>
-                        </div>
-                        <div class="articles-footer">
-                            <ul class="articles-footer-info">
-                                <li>
-                                    <a title="" href="#" class="light-link"><i class="pe-7s-comment"></i> 7 Response</a>
-                                </li>
-                                <li><a title="" href="#" class="light-link"><i class="pe-7s-like"></i> 1221</a></li>
-                            </ul>
-                            <a title="" class="btn" href="blog_post.html">Read more</a>
-                        </div>
-                    </article>
-
-                    <article class="yellow-article">
-                        <div class="articles-header">
-                            <time datetime="2016-10-11">12 hours ago</time>
-                            <span class="articles-header-category"><a title="" href="#" class="yellow">CSS</a></span>
-                        </div>
-                        <div class="articles-content">
-                            <h1><a title="" href="#">Want to learn JavaScript in 2016?</a></h1>
-                            <p>
-                                This is a walk-through of the steps I personally took in a single year, to begin
-                                learning JavaScript. My goal was to be able to
-                                get
-                                a job in a position where Javascript would be at the forefront of what I do on a daily
-                                basis...
-                            </p>
-                        </div>
-                        <div class="articles-footer">
-                            <ul class="articles-footer-info">
-                                <li>
-                                    <a title="" href="#" class="light-link"><i class="pe-7s-comment"></i> 7 Response</a>
-                                </li>
-                                <li><a title="" href="#" class="light-link"><i class="pe-7s-like"></i> 1221</a></li>
-                            </ul>
-                            <a title="" class="btn" href="blog_post.html">Read more</a>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div class="articles-header">
-                            <time datetime="2016-10-11">12 hours ago</time>
-                            <span class="articles-header-category"><a title="" href="#" class="grey">Other</a></span>
-                        </div>
-                        <div class="articles-content">
-                            <h1><a title="" href="blog_post.html">Want to learn JavaScript in 2016?</a></h1>
-                            <p>
-                                This is a walk-through of the steps I personally took in a single year, to begin
-                                learning JavaScript. My goal was to be able to
-                                get
-                                a job in a position where Javascript would be at the forefront of what I do on a daily
-                                basis...
-                            </p>
-                        </div>
-                        <div class="articles-footer">
-                            <ul class="articles-footer-info">
-                                <li>
-                                    <a title="" href="#" class="light-link"><i class="pe-7s-comment"></i> 7 Response</a>
-                                </li>
-                                <li><a title="" href="#" class="light-link"><i class="pe-7s-like"></i> 1221</a></li>
-                            </ul>
-                            <a title="" class="btn" href="blog_post.html">Read more</a>
-                        </div>
-                    </article>
 
                     <!-- PAGINATION -->
                     <nav aria-label="...">
@@ -219,65 +133,8 @@
                 </section>
             </div>
 
-            <!-- AUTHOR -->
-            <div class="aside-blocks col-lg-4 col-xs-12">
-                <aside class="author">
-                    <img src="img/profile-picture.png" alt="" data-rjs="2">
-                    <h2>Bill Gates</h2>
-                    <span class="author-info">Front-End Developer</span>
-                    <span class="author-info">Microsoft Company</span>
-                    <div class="social">
-                        <a href="" title="Twitter"><i class="icon-social_twitter_circle"></i></a>
-                        <a href="" title="Github"><i class="icon-social_github_circle"></i></a>
-                        <a href="" title="LinkedIn"><i class="icon-social_linkedin_circle"></i></a>
-                    </div>
-                    <ul class="author-nav">
-                        <li><a href="" title=""><i class="pe-7s-bookmarks"></i> Download my CV</a></li>
-                        <li><a href="" title=""><i class="pe-7s-paper-plane"></i> Write message</a></li>
-                    </ul>
-                </aside>
+            @(await Component.InvokeAsync("RightAside"))
 
-                <aside class="categories">
-                    <h2 class="aside-title">Categories</h2>
-                    <ul>
-                        <li class="nav-elipse-blue"><a href="#" title="Blog CSS articles">CSS</a></li>
-                        <li class="nav-elipse-red"><a href="#" title="Blog HTML articles">HTML</a></li>
-                        <li class="nav-elipse-yellow"><a href="#" title="Blog Javascript articles">Javascript</a></li>
-                        <li class="nav-elipse-green"><a href="#" title="Blog raphic articles">Graphic</a></li>
-                        <li><a href="#" title="Blog other articles">Other</a></li>
-                    </ul>
-                </aside>
-
-                <aside class="advertisement">
-                    <a href=""><img src="img/advertisement.jpg" alt="Advertisement" data-rjs="2"></a>
-                </aside>
-
-                <aside class="last-project">
-                    <h2 class="aside-title">Last Project</h2>
-                    <div class="last-project-one">
-                        <h3 class="h4"><a href="">Microsoft TypeScript</a></h3>
-                        <time datetime="2016-12-31T23:59:59Z">January 18, 2016</time>
-                        <p class="font-primary">
-                            TypeScript starts from the same syntax and semantics that millions of
-                            JavaScript developers know...
-                        </p>
-                        <a href="#" title="Watch it" class="btn btn-small">Watch it</a>
-                    </div>
-                </aside>
-
-                <aside class="tags">
-                    <h2 class="aside-title">Tags</h2>
-                    <div class="tags-content">
-                        <span class="tag tag-pill tag-default"><a href="">graphic</a></span>
-                        <span class="tag tag-pill tag-default"><a href="">angular2</a></span>
-                        <span class="tag tag-pill tag-default"><a href="">graphic</a></span>
-                        <span class="tag tag-pill tag-default"><a href="">react</a></span>
-                        <span class="tag tag-pill tag-default"><a href="">it</a></span>
-                        <span class="tag tag-pill tag-default"><a href="">science</a></span>
-                    </div>
-                </aside>
-
-            </div>
         </div>
     </div>
 </main>

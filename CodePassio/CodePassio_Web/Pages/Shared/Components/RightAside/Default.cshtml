@@ -1,0 +1,58 @@
+﻿@model CodePassio_Web.Components.RightAsideViewComponent.RightAsideView
+
+<div class="aside-blocks col-lg-4 col-xs-12">
+    <aside class="author">
+        <img src="img/profile-picture.png" alt="" data-rjs="2">
+        <h2>CodePassio</h2>
+        <span class="author-info">Developer</span>
+        <span class="author-info">Fullstack</span>
+        <div class="social">
+            <a href="" title="Twitter"><i class="icon-social_twitter_circle"></i></a>
+            <a href="" title="Github"><i class="icon-social_github_circle"></i></a>
+            <a href="" title="LinkedIn"><i class="icon-social_linkedin_circle"></i></a>
+        </div>
+        <ul class="author-nav">
+            <li><a href="" title=""><i class="pe-7s-bookmarks"></i> Download my CV</a></li>
+            <li><a href="" title=""><i class="pe-7s-paper-plane"></i> Write message</a></li>
+        </ul>
+    </aside>
+
+    <aside class="categories">
+        <h2 class="aside-title">Categories</h2>
+        <ul>
+            <li class="nav-elipse-blue"><a href="#" title="Blog CSS articles">CSS</a></li>
+            <li class="nav-elipse-red"><a href="#" title="Blog HTML articles">HTML</a></li>
+            <li class="nav-elipse-yellow"><a href="#" title="Blog Javascript articles">Javascript</a></li>
+            <li class="nav-elipse-green"><a href="#" title="Blog raphic articles">Graphic</a></li>
+            <li><a href="#" title="Blog other articles">Other</a></li>
+        </ul>
+    </aside>
+
+    @*<aside class="advertisement">
+            <a href=""><img src="img/advertisement.jpg" alt="Advertisement" data-rjs="2"></a>
+        </aside>
+
+        <aside class="last-project">
+            <h2 class="aside-title">Last Project</h2>
+            <div class="last-project-one">
+                <h3 class="h4"><a href="">Microsoft TypeScript</a></h3>
+                <time datetime="2016-12-31T23:59:59Z">January 18, 2016</time>
+                <p class="font-primary">
+                    TypeScript starts from the same syntax and semantics that millions of
+                    JavaScript developers know...
+                </p>
+                <a href="#" title="Watch it" class="btn btn-small">Watch it</a>
+            </div>
+        </aside>*@
+
+    <aside class="tags">
+        <h2 class="aside-title">Tags</h2>
+        <div class="tags-content">
+            @foreach (var t in Model.TagName)
+            {
+                <span class="tag tag-pill tag-default"><a href="">@t</a></span>
+            }
+        </div>
+    </aside>
+
+</div>

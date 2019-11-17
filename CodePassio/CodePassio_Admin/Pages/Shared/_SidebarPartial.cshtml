@@ -1,7 +1,11 @@
-﻿<div id="sidebar" class="nav-collapse ">
+﻿@using Microsoft.AspNetCore.Identity
+@using CodePassio_Core.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<div id="sidebar" class="nav-collapse ">
     <ul class="sidebar-menu" id="nav-accordion">
         <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-        <h5 class="centered">Sam Soffes</h5>
+        <h5 class="centered">@UserManager.GetUserName(User)</h5>
         <li class="mt">
             <a class="active" href="/Index">
                 <i class="fa fa-dashboard"></i>
@@ -49,6 +53,16 @@
             </a>
             <ul class="sub">
                 <li><a asp-page="/Comment/Index">List</a></li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-desktop"></i>
+                <span>User management</span>
+                <i class="fa fa-angle-down pull-right"></i>
+            </a>
+            <ul class="sub">
+                <li><a asp-page="/User/Index">List</a></li>
             </ul>
         </li>
     </ul>

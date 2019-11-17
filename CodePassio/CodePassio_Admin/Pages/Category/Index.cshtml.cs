@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using CodePassio_Service.Interfaces;
 using CodePassio_Service.Services;
+using CodePassio_Service.Helpers;
+using AutoMapper.QueryableExtensions;
 
 namespace CodePassio_Admin.Pages.Category
 {
@@ -22,7 +24,11 @@ namespace CodePassio_Admin.Pages.Category
             _mapper = mapper;
         }
 
-        public IList<CategoryViewModel> Category { get;set; }
+        public string NameSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
+        public int PageSize { get; set; }
+        public PaginatedList<CategoryViewModel> Category { get;set; }
         public class CategoryViewModel
         {
             public Guid Id { get; set; }
@@ -32,10 +38,36 @@ namespace CodePassio_Admin.Pages.Category
             public string ParentName { get; set; }
         }
 
-        public void OnGet()
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, int pageSize = 10)
         {
+            PageSize = pageSize;
+            CurrentSort = sortOrder;
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            CurrentFilter = searchString;
             var categories = _categoryService.GetAll();
-            Category = _mapper.Map<IList<CategoryViewModel>>(categories);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                categories = categories.Where(c => c.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    categories = categories.OrderByDescending(c => c.Name);
+                    break;
+                default:
+                    categories = categories.OrderBy(c => c.Name);
+                    break;
+            }
+            var categoryViewModels = _mapper.ProjectTo<CategoryViewModel>(categories);
+            Category = await PaginatedList<CategoryViewModel>.CreateAsync(categoryViewModels, pageIndex ?? 1, pageSize);
             Category.ToList().ForEach(c =>
             {
                 c.ParentName = c.Parent != Guid.Empty ? _categoryService.Get(c.Id).Name : c.ParentName;

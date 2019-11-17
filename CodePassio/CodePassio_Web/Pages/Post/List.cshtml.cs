@@ -24,7 +24,7 @@ namespace CodePassio_Web.Pages.Post
                 return NotFound();
             }
 
-            Posts = _postService.GetAll().Include(p => p.Category).Where(p => p.CategoryId == id).AsNoTracking().OrderByDescending(p => p.CreatedDate).ToList();
+            Posts = _postService.GetAll().Include(p => p.Category).Where(p => p.CategoryId == id).AsNoTracking().OrderByDescending(p => p.ModifiedDate).ToList();
 
             return Page();
         }
